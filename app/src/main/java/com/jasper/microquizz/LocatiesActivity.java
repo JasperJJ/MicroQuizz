@@ -3,8 +3,14 @@ package com.jasper.microquizz;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class Locaties extends AppCompatActivity {
+import com.jasper.microquizz.adapters.locatieAdapter;
+
+import java.util.ArrayList;
+
+public class LocatiesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -13,7 +19,7 @@ public class Locaties extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locaties);
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -23,8 +29,14 @@ public class Locaties extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new locatieAdapter(list);
         recyclerView.setAdapter(mAdapter);
     }
 }
