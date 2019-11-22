@@ -3,4 +3,10 @@
     <string name="action_musea">Musea</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="onderwerp">Onderwerp</string>
+    <string name="information">Informaite over de locatie of over t beeld/ schilderij   Algemeen verhaaltje</string>
+    <string name="play">Play</string>
+    <string name="highscore">Highscore</string>
+    <string name="plus">Plus</string>
+    <string name="locatie">Locatie</string>
 </resources>

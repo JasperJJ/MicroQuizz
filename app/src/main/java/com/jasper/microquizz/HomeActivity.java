@@ -75,11 +75,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void setBackGroundColors() {
-        GradientDrawable tv_description_bg = (GradientDrawable)tv_description.getBackground();
-        GradientDrawable bt_play_bg = (GradientDrawable)bt_play.getBackground();
-        GradientDrawable bt_highscore_bg = (GradientDrawable)bt_highscore.getBackground();
-        GradientDrawable bt_location_bg = (GradientDrawable)bt_location.getBackground();
-        GradientDrawable bt_plus_bg = (GradientDrawable)bt_plus.getBackground();
+        GradientDrawable tv_description_bg = (GradientDrawable) tv_description.getBackground();
+        GradientDrawable bt_play_bg = (GradientDrawable) bt_play.getBackground();
+        GradientDrawable bt_highscore_bg = (GradientDrawable) bt_highscore.getBackground();
+        GradientDrawable bt_location_bg = (GradientDrawable) bt_location.getBackground();
+        GradientDrawable bt_plus_bg = (GradientDrawable) bt_plus.getBackground();
 
         tv_description_bg.setColor(getResources().getColor(R.color.colorBlue));
         bt_play_bg.setColor(getResources().getColor(R.color.colorBlue));
