@@ -12,4 +12,5 @@
     <string name="inloggen">Inloggen</string>
     <string name="e_mail">E-mail</string>
     <string name="wachtwoord">Wachtwoord</string>
+    <string name="vraag1">VraagButton</string>
 </resources>
