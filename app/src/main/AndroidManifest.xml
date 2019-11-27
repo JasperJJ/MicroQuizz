@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".inlogscherm">
+        <activity android:name=".LocatiesActivity" />
+        <activity android:name=".Registatie" />
+        <activity android:name=".inlogscherm" />
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
