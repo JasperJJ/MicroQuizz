@@ -1,18 +1,19 @@
 package com.jasper.microquizz;
 
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.jasper.microquizz.adapters.locatieAdapter;
 
 import java.util.ArrayList;
 
-public class LocatiesActivity extends AppCompatActivity {
+public class LocatiesActivity extends AppCompatActivity implements locatieAdapter.ItemClickListener{
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private locatieAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -36,7 +37,13 @@ public class LocatiesActivity extends AppCompatActivity {
         list.add("D");
 
         // specify an adapter (see also next example)
-        mAdapter = new locatieAdapter(list);
+        mAdapter = new locatieAdapter(this, list);
+        mAdapter.setClickListener(this);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(TextView textView, int position) {
+        Toast.makeText(getApplicationContext(), "Text: " + textView.getText() + " Position: " + position, Toast.LENGTH_SHORT).show();
     }
 }
