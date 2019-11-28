@@ -2,7 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_home"
+        android:title="@string/action_home"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_musea"
         android:title="@string/action_musea"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_gegevens"
+        android:title="@string/action_gegevens"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_feedback"
+        android:title="@string/action_feedback"
         app:showAsAction="never" />
 </menu>
