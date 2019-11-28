@@ -15,5 +15,7 @@
     <string name="wachtwoord_bevestigen">Wachtwoord bevestigen</string>
     <string name="wachtwoord">Wachtwoord</string>
     <string name="gebruikersnaam">Gebruikersnaam</string>
-    <string name="vraag1">VraagButton</string>
+    <string name="vraag1">Vraag 1</string>
+    <string name="vraag2">Vraag 2</string>
+    <string name="vraag3">Vraag 3</string>
 </resources>
