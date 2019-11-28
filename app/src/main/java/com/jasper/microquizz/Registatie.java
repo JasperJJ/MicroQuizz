@@ -1,7 +1,9 @@
 package com.jasper.microquizz;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,14 @@ public class Registatie extends AppCompatActivity {
 
         findByID();
         setBackGroundColors();
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void findByID() {
         btn_register = findViewById(R.id.btn_register);
