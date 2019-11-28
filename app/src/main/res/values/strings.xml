@@ -11,5 +11,8 @@
     <string name="locatie">Locatie</string>
     <string name="inloggen">Inloggen</string>
     <string name="e_mail">E-mail</string>
+    <string name="registreren">Registreren</string>
+    <string name="wachtwoord_bevestigen">Wachtwoord bevestigen</string>
     <string name="wachtwoord">Wachtwoord</string>
+    <string name="gebruikersnaam">Gebruikersnaam</string>
 </resources>
