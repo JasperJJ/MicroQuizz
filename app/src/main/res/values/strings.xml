@@ -1,17 +1,15 @@
 <resources>
     <string name="app_name">Micro Quizz</string>
-    <string name="title_activity_navigatie">Navigatie</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="action_musea">Musea</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="onderwerp">Onderwerp</string>
+    <string name="information">Informaite over de locatie of over t beeld/ schilderij   Algemeen verhaaltje</string>
+    <string name="play">Play</string>
+    <string name="highscore">Highscore</string>
+    <string name="plus">Plus</string>
+    <string name="locatie">Locatie</string>
+    <string name="inloggen">Inloggen</string>
+    <string name="e_mail">e-mail</string>
+    <string name="wachtwoord">Wachtwoord</string>
 </resources>
