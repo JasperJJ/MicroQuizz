@@ -17,6 +17,7 @@
         <activity android:name=".LocatiesActivity" />
         <activity android:name=".Registatie" />
         <activity android:name=".inlogscherm" />
+        <activity android:name=".PlayActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
