@@ -28,7 +28,7 @@ public class locatieAdapter extends RecyclerView.Adapter<locatieAdapter.MyViewHo
 
         MyViewHolder(View v) {
             super(v);
-            textView = v.findViewById(R.id.textView);
+            textView = v.findViewById(R.id.tv_name);
             v.setOnClickListener(this);
         }
 
