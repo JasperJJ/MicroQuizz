@@ -1,8 +1,10 @@
 package com.jasper.microquizz;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,22 +16,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DrawerLayout drawerLayout;
 
     private TextView tv_description;
-    private Button bt_play;
-    private Button bt_highscore;
-    private Button bt_location;
-    private Button bt_plus;
+    private Button btn_play;
+    private Button btn_highscore;
+    private Button btn_location;
+    private Button btn_plus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        findByID();
+        initControl();
         setBackGroundColors();
         configureNavigationDrawer();
         configureToolbar();
@@ -66,25 +68,39 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
-    public void findByID() {
+    public void initControl() {
         tv_description = findViewById(R.id.tv_description);
-        bt_play = findViewById(R.id.bt_play);
-        bt_highscore = findViewById(R.id.bt_highscore);
-        bt_location = findViewById(R.id.bt_location);
-        bt_plus = findViewById(R.id.bt_plus);
+        btn_play = findViewById(R.id.btn_play);
+        btn_highscore = findViewById(R.id.btn_highscore);
+        btn_location = findViewById(R.id.btn_location);
+        btn_plus = findViewById(R.id.btn_plus);
+        
+        btn_location.setOnClickListener(this);
+        btn_play.setOnClickListener(this);
     }
 
     public void setBackGroundColors() {
         GradientDrawable tv_description_bg = (GradientDrawable) tv_description.getBackground();
-        GradientDrawable bt_play_bg = (GradientDrawable) bt_play.getBackground();
-        GradientDrawable bt_highscore_bg = (GradientDrawable) bt_highscore.getBackground();
-        GradientDrawable bt_location_bg = (GradientDrawable) bt_location.getBackground();
-        GradientDrawable bt_plus_bg = (GradientDrawable) bt_plus.getBackground();
+        GradientDrawable bt_play_bg = (GradientDrawable) btn_play.getBackground();
+        GradientDrawable bt_highscore_bg = (GradientDrawable) btn_highscore.getBackground();
+        GradientDrawable bt_location_bg = (GradientDrawable) btn_location.getBackground();
+        GradientDrawable bt_plus_bg = (GradientDrawable) btn_plus.getBackground();
 
         tv_description_bg.setColor(getResources().getColor(R.color.colorBlue));
         bt_play_bg.setColor(getResources().getColor(R.color.colorBlue));
         bt_highscore_bg.setColor(getResources().getColor(R.color.colorBlue));
         bt_location_bg.setColor(getResources().getColor(R.color.colorGreen));
         bt_plus_bg.setColor(getResources().getColor(R.color.colorGreen));
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_play) {
+            Intent intent = new Intent(this, PlayActivity.class);
+            this.startActivity(intent);
+        } else if (v.getId() == R.id.btn_location) {
+            Intent intent = new Intent(this, LocatiesActivity.class);
+            this.startActivity(intent);
+        }
     }
 }
