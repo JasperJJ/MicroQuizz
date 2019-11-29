@@ -54,6 +54,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+                if (itemId == R.id.action_home) {
+                    Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.action_musea) {
+                    Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
                 return false;
             }
         });
