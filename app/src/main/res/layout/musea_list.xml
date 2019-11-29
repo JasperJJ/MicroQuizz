@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Informatie over het schilderij"
+        android:text="Informatie over het museum"
         app:layout_constraintEnd_toStartOf="@+id/iv_subject"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,15 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
-        android:text="Naam Schilderij"
+        android:text="Naam museum"
         app:layout_constraintEnd_toStartOf="@+id/iv_subject"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_subject"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitXY"
