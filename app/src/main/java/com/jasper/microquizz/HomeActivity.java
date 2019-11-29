@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (actionbar != null) {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_hamburger_menu);
             actionbar.setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 

@@ -4,17 +4,21 @@
     <item
         android:id="@+id/action_home"
         android:title="@string/action_home"
+        android:icon="@drawable/ic_awesome_home"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_musea"
         android:title="@string/action_musea"
+        android:icon="@drawable/ic_map_museum"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_gegevens"
         android:title="@string/action_gegevens"
+        android:icon="@drawable/ic_material_data_usage"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_feedback"
         android:title="@string/action_feedback"
+        android:icon="@drawable/ic_material_feedback"
         app:showAsAction="never" />
 </menu>
