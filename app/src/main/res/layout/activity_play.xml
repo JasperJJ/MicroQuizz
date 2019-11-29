@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".PlayActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar" />
 
     <ImageView
         android:layout_width="145dp"
@@ -14,86 +24,86 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/top_right_purple_corner" />
 
-    <ImageView
-        android:layout_width="292dp"
-        android:layout_height="255dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bottom_left_blue_corner" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="292dp"
+            android:layout_height="255dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/bottom_left_blue_corner" />
 
-    <ImageView
-        android:id="@+id/iv_vraag"
-        android:layout_width="253dp"
-        android:layout_height="217dp"
-        android:layout_marginTop="60dp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/example_background" />
+        <ImageView
+            android:id="@+id/iv_vraag"
+            android:layout_width="253dp"
+            android:layout_height="217dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/example_background" />
 
-    <EditText
-        android:id="@+id/et_vraag"
-        android:layout_width="357dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="false"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/rb_vraag1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_vraag"
-        tools:text="Van welke kunstenaar is dit schilderij?" />
+        <EditText
+            android:id="@+id/et_vraag"
+            android:layout_width="357dp"
+            android:layout_height="135dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_vraag"
+            tools:text="Van welke kunstenaar is dit schilderij?" />
 
-    <RadioButton
-        android:id="@+id/rb_vraag1"
-        android:layout_width="300dp"
-        android:layout_height="92dp"
-        android:text="@string/vraag1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/rb_vraag3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826" />
+        <RadioGroup
+            android:layout_width="357dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_vraag">
 
-    <RadioButton
-        android:id="@+id/rb_vraag2"
-        android:layout_width="300dp"
-        android:layout_height="92dp"
-        android:text="@string/vraag2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/rb_vraag3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rb_vraag1"
-        app:layout_constraintVertical_bias="1.0"/>
+            <RadioButton
+                android:id="@+id/rb_vraag1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/vraag1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="visible" />
 
-    <RadioButton
-        android:id="@+id/rb_vraag3"
-        android:layout_width="300dp"
-        android:layout_height="92dp"
-        android:buttonTint="#8BC34A"
-        android:checked="true"
-        android:text="@string/vraag3"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.974"/>
+            <RadioButton
+                android:id="@+id/rb_vraag2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/vraag2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="visible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/rb_vraag3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:buttonTint="#8BC34A"
+                android:checked="false"
+                android:text="@string/vraag3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="visible" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<com.google.android.material.navigation.NavigationView
+android:id="@+id/navigation"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="start"
+app:headerLayout="@layout/sidebar_header"
+app:menu="@menu/menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>

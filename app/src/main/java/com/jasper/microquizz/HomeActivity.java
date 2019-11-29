@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, PlayActivity.class);
             this.startActivity(intent);
         } else if (v.getId() == R.id.btn_location) {
-            Intent intent = new Intent(this, LocatiesActivity.class);
+            Intent intent = new Intent(this, museumKiezen.class);
             this.startActivity(intent);
         }
     }

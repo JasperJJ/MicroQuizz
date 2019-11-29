@@ -16,6 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".HomeActivity" />
         <activity android:name=".LocatiesActivity" />
+        <activity android:name=".museumKiezen" />
         <activity android:name=".Registatie" />
         <activity android:name=".inlogscherm" />
         <activity android:name=".PlayActivity" />

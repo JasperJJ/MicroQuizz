@@ -8,13 +8,13 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="197dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="104dp"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
         android:layout_marginTop="116dp"
         android:background="@drawable/rounded_corners"
         android:text="registeren"
         android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -31,13 +31,13 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="197dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corners"
         android:text="Inloggen"
         android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

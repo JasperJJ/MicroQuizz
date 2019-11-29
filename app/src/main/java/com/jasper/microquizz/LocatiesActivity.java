@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,13 +44,12 @@ public class LocatiesActivity extends AppCompatActivity implements locatieAdapte
         recyclerView.setLayoutManager(layoutManager);
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Een korte beschrijving van het schilderij of het beeld");
-        list.add("Een korte beschrijving van het schilderij of het beeld");
-        list.add("Een korte beschrijving van het schilderij of het beeld");
-        list.add("Een korte beschrijving van het schilderij of het beeld");
-        list.add("Een korte beschrijving van het schilderij of het beeld");
+        list.add("Een korte beschrijving van het beeld of schilderij");
+        list.add("Een korte beschrijving van het beeld of schilderij");
+        list.add("Een korte beschrijving van het beeld of schilderij");
+        list.add("Een korte beschrijving van het beeld of schilderij");
+        list.add("Een korte beschrijving van het beeld of schilderij");
 
-        // specify an adapter (see also next example)
         mAdapter = new locatieAdapter(this, list);
         mAdapter.setClickListener(this);
         recyclerView.setAdapter(mAdapter);
@@ -101,6 +99,7 @@ public class LocatiesActivity extends AppCompatActivity implements locatieAdapte
 
     @Override
     public void onItemClick(TextView textView, int position) {
-        Toast.makeText(getApplicationContext(), "Text: " + textView.getText() + " Position: " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, PlayActivity.class);
+        this.startActivity(intent);
     }
 }
