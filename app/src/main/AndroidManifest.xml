@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Beginscherm"></activity>
         <activity android:name=".LocatiesActivity" />
         <activity android:name=".Registatie" />
         <activity android:name=".inlogscherm" />
