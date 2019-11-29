@@ -19,8 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.974"
         tools:text="Vraag 3" />
 
     <RadioButton
@@ -35,13 +33,14 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioButton3"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.817"
         tools:text="Vraag 2" />
 
     <RadioButton
         android:id="@+id/radioButton3"
         android:layout_width="300dp"
         android:layout_height="92dp"
+        android:layout_marginBottom="116dp"
         android:text="@string/vraag1"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:visibility="visible"
@@ -49,8 +48,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="Vraag 1" />
 
     <ImageView
@@ -74,6 +73,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="false"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:singleLine="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:text="Van welke kunstenaar is dit schilderij?"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Van welke kunstenaar is dit schilderij?" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
