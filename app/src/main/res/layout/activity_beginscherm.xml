@@ -26,7 +26,8 @@
         android:layout_marginTop="108dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/Microquizz_smaller" />
+        app:srcCompat="@drawable/microquizz_smaller"
+        tools:srcCompat="@drawable/microquizz_smaller" />
 
     <Button
         android:id="@+id/button"
