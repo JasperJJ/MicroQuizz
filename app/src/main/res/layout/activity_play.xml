@@ -43,23 +43,25 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/example_background" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_vraag"
             android:layout_width="357dp"
             android:layout_height="135dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:clickable="false"
+            android:layout_weight="1"
+            android:ellipsize="none"
             android:ems="10"
+            android:gravity="center_horizontal|center_vertical"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:singleLine="false"
+            android:maxLines="10"
+            android:scrollHorizontally="false"
+            android:text="Van welke kunstenaar is dit schilderij?"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_vraag"
-            tools:text="Van welke kunstenaar is dit schilderij?" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_vraag" />
 
         <RadioGroup
             android:layout_width="357dp"
