@@ -15,8 +15,10 @@
         app:srcCompat="@drawable/top_right_purple_corner" />
 
     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="292dp"
         android:layout_height="255dp"
+        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bottom_left_blue_corner" />
@@ -55,8 +57,9 @@
         android:layout_marginTop="72dp"
         android:background="@drawable/rounded_corners_with_stroke"
         android:ems="10"
+        android:hint="email"
         android:inputType="textPersonName"
-        android:textColor="@android:color/background_light"
+        android:textColor="#A22121"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Inloggen" />
@@ -78,6 +81,7 @@
         android:layout_marginTop="164dp"
         android:background="@drawable/rounded_corners_with_stroke"
         android:ems="10"
+        android:hint="wachtwoord"
         android:inputType="textPassword"
         android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,5 +99,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Inloggen" />
+
+    <TextView
+        android:id="@+id/tv_inlogpoging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#673AB7"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/btn_inloggen"
+        app:layout_constraintVertical_bias="0.498"
+        tools:text="Inlogpoging : "
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
