@@ -35,33 +35,32 @@ public class inlogscherm extends AppCompatActivity {
 
         inlogpoging.setText("Aantal pogingen over: 5");
 
-        findByID();
-        setBackGroundColors();
-
-        btn_inloggen.setOnClickListener(new View.OnClickListener() {
+        //findByID();
+        //setBackGroundColors();
+        // als we op login klikken dan roepen we de functie aan inlogBevestig(gebruikersnaam, gebruikerswachtwoord);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inlogscherm.this, HomeActivity.class);
-                startActivity(intent);
+                inlogBevestig(naam.getText().toString(),wachtwoord.getText().toString());
             }
         });
     }
 
-    public void findByID() {
-        btn_inloggen = findViewById(R.id.btn_inloggen);
-    }
+   // public void findByID() {
+    //    btn_inloggen = findViewById(R.id.btn_inloggen);
+   // }
 
-    public void setBackGroundColors() {
-        GradientDrawable btn_inloggen_bg = (GradientDrawable) btn_inloggen.getBackground();
+   // public void setBackGroundColors() {
+     //   GradientDrawable btn_inloggen_bg = (GradientDrawable) btn_inloggen.getBackground();
 
-       btn_inloggen_bg.setColor(getResources().getColor(R.color.colorBlue));
-    }
+     //  btn_inloggen_bg.setColor(getResources().getColor(R.color.colorBlue));
+    //}
 
     //functie voor het inloggen te verifieren
 
-    private void inlogBevestig(String naam, String wachtwoord) {
+    private void inlogBevestig(String gebruikersnaam, String gebruikerswachtwoord) {
         //check of gebruikersnaam en wachtwoord kloppen
-        if ((naam.equals("Admin")) && (wachtwoord.equals("1234"))) {
+        if ((gebruikersnaam.equals("Admin")) && (gebruikerswachtwoord.equals("1234"))) {
         //ga naar home scherm
         Intent intent = new Intent(inlogscherm.this, HomeActivity.class);
         startActivity(intent);
