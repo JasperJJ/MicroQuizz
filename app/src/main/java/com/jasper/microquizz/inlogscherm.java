@@ -35,13 +35,13 @@ public class inlogscherm extends AppCompatActivity {
 
         inlogpoging.setText("Aantal pogingen over: 5");
 
-        //findByID();
-        //setBackGroundColors();
+        findByID();
+        setBackGroundColors();
 
         btn_inloggen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+                Intent intent = new Intent(inlogscherm.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -51,10 +51,10 @@ public class inlogscherm extends AppCompatActivity {
         btn_inloggen = findViewById(R.id.btn_inloggen);
     }
 
-   // public void setBackGroundColors() {
-    //    GradientDrawable btn_inloggen_bg = (GradientDrawable) btn_inloggen.getBackground();
+    public void setBackGroundColors() {
+        GradientDrawable btn_inloggen_bg = (GradientDrawable) btn_inloggen.getBackground();
 
-     //   btn_inloggen_bg.setColor(getResources().getColor(R.color.colorBlue));
+       btn_inloggen_bg.setColor(getResources().getColor(R.color.colorBlue));
     }
 
     //functie voor het inloggen te verifieren
