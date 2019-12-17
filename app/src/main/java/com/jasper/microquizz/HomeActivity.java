@@ -40,14 +40,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        logout = (Button)findViewById(R.id.btn_highscore);
+        //logout = (Button)findViewById(R.id.btn_highscore);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Logout();
-            }
-        });
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Logout();
+//            }
+//        });
 
 
 
