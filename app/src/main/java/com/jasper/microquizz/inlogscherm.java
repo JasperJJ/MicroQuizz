@@ -28,7 +28,7 @@ public class inlogscherm extends AppCompatActivity {
     private Button login;
     private TextView inlogpoging;
     //teller voor inlogpogingen
-    private int loginTeller = 5;
+    private int loginTeller = 3;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     // laat een bericht zien tijdens het laden bij het inloggen
@@ -45,7 +45,7 @@ public class inlogscherm extends AppCompatActivity {
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
 
-        inlogpoging.setText("Aantal pogingen over: 5");
+       // inlogpoging.setText("Aantal pogingen over: 5");
 
         firebaseAuth = FirebaseAuth.getInstance();
 

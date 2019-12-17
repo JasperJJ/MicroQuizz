@@ -3,6 +3,8 @@ package com.jasper.microquizz;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +17,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private FirebaseAuth firebaseAuth;
+    private Button logout;
+
 
     private DrawerLayout drawerLayout;
 
@@ -31,11 +38,50 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        //logout = (Button)findViewById(R.id.btn_highscore);
+
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Logout();
+//            }
+//        });
+
+
+
         initControl();
         setBackGroundColors();
         configureNavigationDrawer();
         configureToolbar();
     }
+
+    private void Logout(){
+
+        firebaseAuth.signOut();
+        finish();
+        startActivity(new Intent(HomeActivity.this, inlogscherm.class));
+
+    }
+
+    //@Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
+
+//    @Override
+//    public  boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.uitloggen: {
+//                Logout();
+//            }
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
 
     private void configureToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -63,6 +109,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
                     startActivity(intent);
                     return true;
+                } else if (itemId == R.id.uitloggen) {
+                    Logout();
+                   // Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
+                   // startActivity(intent);
+                    return true;
+
+
                 }
                 return false;
             }
@@ -85,7 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btn_highscore = findViewById(R.id.btn_highscore);
         btn_location = findViewById(R.id.btn_location);
         btn_plus = findViewById(R.id.btn_plus);
-        
+
         btn_location.setOnClickListener(this);
         btn_play.setOnClickListener(this);
     }
