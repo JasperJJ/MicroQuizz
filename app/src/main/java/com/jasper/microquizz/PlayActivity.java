@@ -51,7 +51,7 @@ public class PlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlayActivity.this, LocatiesActivity.class);
                     startActivity(intent);
                     return true;
-                } else if (itemId == R.id.action_logout) {
+                } else if (itemId == R.id.uitloggen) {
                     Intent intent = new Intent(PlayActivity.this, Beginscherm.class);
                     startActivity(intent);
                     return true;

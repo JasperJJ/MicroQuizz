@@ -3,42 +3,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="ExtraText">
-    <item>
+
+    <item
 
         android:id="@+id/action_home"
-        android:orderIncategory="100"
+        android:orderInCategory="100"
         android:title="@string/action_home"
         android:icon="@drawable/ic_awesome_home"
         app:showAsAction="never" />
 
 
-    <item>
+    <item
         android:id="@+id/action_musea"
-        android:orderIncategory="200"
+        android:orderInCategory="200"
         android:title="@string/action_musea"
         android:icon="@drawable/ic_map_museum"
         app:showAsAction="never" />
 
 
-    <item>
-        android:orderIncategory="300"
+    <item
+        android:orderInCategory="300"
         android:id="@+id/action_gegevens"
         android:title="@string/action_gegevens"
         android:icon="@drawable/ic_material_data_usage"
         app:showAsAction="never" />
 
 
-    <item>
+    <item
         android:id="@+id/action_feedback"
-        android:orderIncategory="400"
+        android:orderInCategory="400"
         android:title="@string/action_feedback"
         android:icon="@drawable/ic_material_feedback"
         app:showAsAction="never" />
 
 
-    <item>
+    <item
         android:id="@+id/uitloggen"
-        android:orderIncategory="500"
+        android:orderInCategory="500"
         android:icon="@drawable/ic_map_museum"
         android:title="@string/action_logout"
         app:showAsAction="always"

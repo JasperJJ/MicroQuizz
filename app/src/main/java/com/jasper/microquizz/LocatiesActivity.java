@@ -81,7 +81,7 @@ public class LocatiesActivity extends AppCompatActivity implements locatieAdapte
                     Intent intent = new Intent(LocatiesActivity.this, LocatiesActivity.class);
                     startActivity(intent);
                     return true;
-                } else if (itemId == R.id.action_logout) {
+                } else if (itemId == R.id.uitloggen) {
                     Intent intent = new Intent(LocatiesActivity.this, Beginscherm.class);
                     startActivity(intent);
                     return true;

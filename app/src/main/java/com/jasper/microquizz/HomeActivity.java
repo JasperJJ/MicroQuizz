@@ -3,6 +3,7 @@ package com.jasper.microquizz;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +40,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        logout = (Button)findViewById(R.id.btn_highscore);
+        logout = (Button)findViewById(R.id.uitloggen);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +71,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    //@Override
-    //public  boolean onOptionsItemSelected(MenuItem item) {
-        //switch(item.getItemId())
-        //case (R.id.btn_highscore) {
-          //  Logout();
-        //}
-      //  return super.onOptionsItemSelected(item);
-    //}
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.uitloggen: {
+                Logout();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
     private void configureToolbar() {
@@ -106,25 +109,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
                     startActivity(intent);
                     return true;
-                } else if (itemId == R.id.action_logout) {
+                } else if (itemId == R.id.uitloggen) {
                     Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
                     startActivity(intent);
                     return true;
+
+
                 }
                 return false;
             }
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int itemId = item.getItemId();
+//        if (itemId == android.R.id.home) {
+//            drawerLayout.openDrawer(GravityCompat.START);
+//            return true;
+//        }
+//        return true;
+//    }
 
     public void initControl() {
         tv_description = findViewById(R.id.tv_description);
