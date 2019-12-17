@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "30964144694",
+    "firebase_url": "https://microquizz.firebaseio.com",
+    "project_id": "microquizz",
+    "storage_bucket": "microquizz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30964144694:android:818462c4b5a36bf9c71697",
+        "android_client_info": {
+          "package_name": "com.jasper.microquizz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30964144694-nnaujvese3rqm70sd8jp5pid1egmkb93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBniMDkjTIij_cQTXlZJC2A0uXAVbnhnJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30964144694-nnaujvese3rqm70sd8jp5pid1egmkb93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
