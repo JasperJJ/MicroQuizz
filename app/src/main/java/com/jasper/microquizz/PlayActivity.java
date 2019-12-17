@@ -1,15 +1,14 @@
 package com.jasper.microquizz;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.service.voice.AlwaysOnHotwordDetector;
-import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -50,6 +49,10 @@ public class PlayActivity extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.action_musea) {
                     Intent intent = new Intent(PlayActivity.this, LocatiesActivity.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.uitloggen) {
+                    Intent intent = new Intent(PlayActivity.this, Beginscherm.class);
                     startActivity(intent);
                     return true;
                 }
