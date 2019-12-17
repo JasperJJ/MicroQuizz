@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Beginscherm extends AppCompatActivity {
 
     private Button btn_register;
     private Button btn_login;
-
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,17 @@ public class Beginscherm extends AppCompatActivity {
         initControl();
         setBackGroundColors();
 
+        /*
+        // poging tot het onthouden van het inloggen in het beginscherm te doen
+        // zorgt er voor dat de app crashed
+
+        FirebaseUser gebruiker = firebaseAuth.getCurrentUser();
+        // als de gebruiker al is ingelogd gaat hij naar het homescherm.
+        if (gebruiker != null) {
+            finish();
+            startActivity(new Intent(Beginscherm.this, HomeActivity.class));
+        }
+        */
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

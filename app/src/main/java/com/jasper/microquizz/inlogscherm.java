@@ -1,5 +1,6 @@
 package com.jasper.microquizz;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -7,8 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class inlogscherm extends AppCompatActivity {
 
@@ -20,6 +29,9 @@ public class inlogscherm extends AppCompatActivity {
     private TextView inlogpoging;
     //teller voor inlogpogingen
     private int loginTeller = 5;
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
+    // laat een bericht zien tijdens het laden bij het inloggen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +46,17 @@ public class inlogscherm extends AppCompatActivity {
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
 
         inlogpoging.setText("Aantal pogingen over: 5");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(this);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        // als de gebruiker al is ingelogd gaat hij naar het startscherm.
+        if (user != null) {
+            finish();
+            startActivity(new Intent(inlogscherm.this, HomeActivity.class));
+        }
 
         //findByID();
         //setBackGroundColors();
@@ -59,7 +82,32 @@ public class inlogscherm extends AppCompatActivity {
     //functie voor het inloggen te verifieren
 
     private void inlogBevestig(String gebruikersnaam, String gebruikerswachtwoord) {
-        //check of gebruikersnaam en wachtwoord kloppen
+
+        progressDialog.setMessage("Laden");
+        progressDialog.show();
+
+        firebaseAuth.signInWithEmailAndPassword(gebruikersnaam, gebruikerswachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                    Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(inlogscherm.this, HomeActivity.class));
+                }
+                else{
+                    Toast.makeText(inlogscherm.this, "Inloggen mislukt", Toast.LENGTH_LONG).show();
+                    loginTeller --;
+                    inlogpoging.setText("Aantal pogingen over: " + String.valueOf(loginTeller));
+                    if (loginTeller == 0){
+                        login.setEnabled(false);
+                    }
+                }
+            }
+        });
+
+        // hieronder mocht gedelete worden,
+        // ik heb het maar in comments gezet voor toekomstige referentie
+       /* //check of gebruikersnaam en wachtwoord kloppen
         if ((gebruikersnaam.equals("Admin")) && (gebruikerswachtwoord.equals("1234"))) {
         //ga naar home scherm
         Intent intent = new Intent(inlogscherm.this, HomeActivity.class);
@@ -76,7 +124,7 @@ public class inlogscherm extends AppCompatActivity {
             }
 
         }
-
+        */
     }
 
 
