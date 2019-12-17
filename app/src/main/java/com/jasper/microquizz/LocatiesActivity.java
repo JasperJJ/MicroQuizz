@@ -18,7 +18,7 @@ import com.jasper.microquizz.adapters.locatieAdapter;
 
 import java.util.ArrayList;
 
-public class LocatiesActivity extends AppCompatActivity implements locatieAdapter.ItemClickListener{
+public class LocatiesActivity extends AppCompatActivity implements locatieAdapter.ItemClickListener {
 
     private DrawerLayout drawerLayout;
 
@@ -79,6 +79,10 @@ public class LocatiesActivity extends AppCompatActivity implements locatieAdapte
                     return true;
                 } else if (itemId == R.id.action_musea) {
                     Intent intent = new Intent(LocatiesActivity.this, LocatiesActivity.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.action_logout) {
+                    Intent intent = new Intent(LocatiesActivity.this, Beginscherm.class);
                     startActivity(intent);
                     return true;
                 }

@@ -16,7 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawerLayout;
 
@@ -63,6 +63,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
                     startActivity(intent);
                     return true;
+                } else if (itemId == R.id.action_logout) {
+                    Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
+                    startActivity(intent);
+                    return true;
                 }
                 return false;
             }
@@ -85,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btn_highscore = findViewById(R.id.btn_highscore);
         btn_location = findViewById(R.id.btn_location);
         btn_plus = findViewById(R.id.btn_plus);
-        
+
         btn_location.setOnClickListener(this);
         btn_play.setOnClickListener(this);
     }
