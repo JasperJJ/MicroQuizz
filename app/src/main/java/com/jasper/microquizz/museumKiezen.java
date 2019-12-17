@@ -84,6 +84,11 @@ public class museumKiezen extends AppCompatActivity implements museumAdapter.Ite
                     startActivity(intent);
                     return true;
                 }
+                else if (itemId == R.id.action_logout) {
+                    Intent intent = new Intent(museumKiezen.this, Beginscherm.class);
+                    startActivity(intent);
+                    return true;
+                }
                 return false;
             }
         });

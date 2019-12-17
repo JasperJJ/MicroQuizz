@@ -21,4 +21,9 @@
         android:title="@string/action_feedback"
         android:icon="@drawable/ic_material_feedback"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_map_museum"
+        app:showAsAction="never" />
 </menu>
