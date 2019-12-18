@@ -59,7 +59,8 @@
         android:ems="10"
         android:hint="email"
         android:inputType="textPersonName"
-        android:textColor="#A22121"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textIsSelectable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Inloggen" />

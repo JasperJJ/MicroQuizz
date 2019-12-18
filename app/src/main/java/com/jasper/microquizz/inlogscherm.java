@@ -54,6 +54,7 @@ public class inlogscherm extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
         // als de gebruiker al is ingelogd gaat hij naar het startscherm.
         if (user != null) {

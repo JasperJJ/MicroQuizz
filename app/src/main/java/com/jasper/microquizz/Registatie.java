@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.auth.FirebaseUser;
 
 
@@ -34,7 +35,9 @@ public class Registatie extends AppCompatActivity {
         userPassword = (EditText) findViewById(R.id.et_wachtwoord);
         userEmail = (EditText) findViewById(R.id.et_email);
         regButton = (Button) findViewById(R.id.btn_register);
-        userName = (TextView) findViewById(R.id.et_naam);
+        userName = (EditText) findViewById(R.id.et_naam);
+        //ik heb de vorm van username veranders van textvieuw naar edittext
+        // anders kwam het niet uit met de private
     }
 
     private boolean validate(){
@@ -57,14 +60,18 @@ public class Registatie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registatie);
         firebaseAuth = FirebaseAuth.getInstance();
-
+/*
         regButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
+
             public void onClick(View v) {
                 if(validate()){
                     //upload naar de database;
                     String user_email= userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+
+
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,10 +85,13 @@ public class Registatie extends AppCompatActivity {
 
                         }
                     });
+
+
                 }
             }
-        });
 
+        });
+*/
         findByID();
         setBackGroundColors();
 
@@ -93,6 +103,29 @@ public class Registatie extends AppCompatActivity {
             }
         });
     }
+
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser != null) {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(Registatie.this , "Registreren succes",Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        finish();
+                        startActivity(new Intent(Registatie.this, Beginscherm.class));
+                    } else {
+                        Toast.makeText(Registatie.this , "Registreren niet succesvol",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            });
+
+
+        }
+    }
+
     public void findByID() {
         btn_register = findViewById(R.id.btn_register);
     }
