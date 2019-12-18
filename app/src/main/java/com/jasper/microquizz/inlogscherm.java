@@ -29,6 +29,8 @@ public class inlogscherm extends AppCompatActivity {
     private TextView inlogpoging;
     //teller voor inlogpogingen
     private int loginTeller = 3;
+    private TextView userRegistration;
+
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     // laat een bericht zien tijdens het laden bij het inloggen
@@ -44,6 +46,7 @@ public class inlogscherm extends AppCompatActivity {
         wachtwoord = (EditText)findViewById(R.id.et_wachtwoord);
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
+        //userRegistration = (TextView)findViewById(R.id.btn_register);
 
        // inlogpoging.setText("Aantal pogingen over: 5");
 
@@ -91,8 +94,12 @@ public class inlogscherm extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
                     if (task.isSuccessful()) {
-                    Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(inlogscherm.this, HomeActivity.class));
+                        progressDialog.dismiss();
+                        //nietmeer nodig omdat je niet wilt inloggen gelukt en dan probeer opnieuw
+                       // Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
+                        // email verificatie zodat je niet direct wordt doorgestuurd maar eerst moet verificeren of je email al bestaat
+                        checkEmailVerificatie();
+                   // startActivity(new Intent(inlogscherm.this, HomeActivity.class));
                 }
                 else{
                     Toast.makeText(inlogscherm.this, "Inloggen mislukt", Toast.LENGTH_LONG).show();
@@ -125,6 +132,21 @@ public class inlogscherm extends AppCompatActivity {
 
         }
         */
+    }
+
+    private void checkEmailVerificatie() {
+
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        Boolean emailvlag = firebaseUser.isEmailVerified();
+
+        if (emailvlag) {
+            finish();
+            startActivity(new Intent(inlogscherm.this, HomeActivity.class));
+        }else {
+            // als gebruiker email niet heeft bevestigd dan krijgt de gebruiker een bericht
+            Toast.makeText(this, "Bevestig uw Email-adress", Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
     }
 
 
