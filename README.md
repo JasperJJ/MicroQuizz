@@ -2,6 +2,8 @@
 
 Rules:
 
+* Fetch: Aan het begin van de dag Fetch je alle wijzigingen en pull je deze ook als dit nodig is.
+
 * Branch: Voordat je wijzigingen gaan maken, maak je eerst een nieuwe branch. Controleer dus altijd in welke branch je zit voordat je iets gaat aanpassen.
 
 * Commit: Je wijzigingen commit je apart per onderdeel zoals: new Login Function, Changed login text, removed unnecessary code, Changed register behavior.
