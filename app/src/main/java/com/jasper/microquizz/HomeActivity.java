@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -55,6 +56,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setBackGroundColors();
         configureNavigationDrawer();
         configureToolbar();
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(android.R.color.black));
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void Logout(){
