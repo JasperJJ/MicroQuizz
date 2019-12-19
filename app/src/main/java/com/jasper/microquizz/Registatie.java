@@ -34,7 +34,7 @@ public class Registatie extends AppCompatActivity {
         userPassword = (EditText) findViewById(R.id.et_wachtwoord);
         userEmail = (EditText) findViewById(R.id.et_email);
         regButton = (Button) findViewById(R.id.btn_register);
-        userName = (TextView) findViewById(R.id.et_naam);
+        userName = findViewById(R.id.et_naam);
     }
 
     private boolean validate(){
