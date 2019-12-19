@@ -20,7 +20,8 @@
         <activity android:name=".Registatie" />
         <activity android:name=".inlogscherm" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".Beginscherm">
+        <activity android:name=".Beginscherm"/>
+        <activity android:name=".QuizActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
