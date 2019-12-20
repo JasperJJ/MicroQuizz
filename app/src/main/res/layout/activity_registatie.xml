@@ -15,6 +15,7 @@
         app:srcCompat="@drawable/top_right_purple_corner" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="292dp"
         android:layout_height="255dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
 
     <EditText
-        android:id="@+id/et_naam"
+        android:id="@+id/etUserName"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:layout_marginTop="72dp"
@@ -71,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/etUserEmail"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:layout_marginTop="164dp"
@@ -106,39 +107,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
 
-    <TextView
-        android:id="@+id/bevestigen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="320dp"
-        android:text="@string/wachtwoord_bevestigen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
-
-    <EditText
-        android:id="@+id/et_bevestigen_pw"
-        android:layout_width="330dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="350dp"
-        android:background="@drawable/rounded_corners_with_stroke"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
-
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btnRegister"
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:layout_marginTop="442dp"
         android:background="@drawable/rounded_corners"
         android:text="@string/registreren"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.603"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
+        app:layout_constraintTop_toBottomOf="@+id/et_wachtwoord"
+        app:layout_constraintVertical_bias="0.23" />
+
+    <TextView
+        android:id="@+id/tvUserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heb je al een account? Inloggen"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="0.496" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

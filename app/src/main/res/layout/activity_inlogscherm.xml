@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Inloggen" />
 
     <EditText
-        android:id="@+id/et_naam"
+        android:id="@+id/etUserEmail"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:layout_marginTop="72dp"
@@ -111,5 +111,18 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_inloggen"
         app:layout_constraintVertical_bias="0.498"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nog geen account? Registreren"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_inloggen"
+        app:layout_constraintVertical_bias="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
