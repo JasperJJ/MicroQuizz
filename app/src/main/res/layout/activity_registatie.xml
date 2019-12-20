@@ -15,6 +15,7 @@
         app:srcCompat="@drawable/top_right_purple_corner" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="292dp"
         android:layout_height="255dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,12 +128,13 @@
         android:id="@+id/tvUserLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nog niet ingelogd? Login"
+        android:text="Heb je al een account? Inloggen"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister"
-        app:layout_constraintVertical_bias="0.496"
-        tools:layout_editor_absoluteX="121dp" />
+        app:layout_constraintVertical_bias="0.496" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
