@@ -81,13 +81,13 @@ public class Registatie extends AppCompatActivity {
         findByID();
         setBackGroundColors();
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+//        btn_register.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

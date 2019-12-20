@@ -28,7 +28,9 @@ public class inlogscherm extends AppCompatActivity {
     private EditText wachtwoord;
     private Button login;
     private TextView inlogpoging;
+
     private TextView userRegistration;
+
     //teller voor inlogpogingen
     private int loginTeller = 3;
     private FirebaseAuth firebaseAuth;
