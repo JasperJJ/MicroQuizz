@@ -2,7 +2,6 @@ package com.jasper.microquizz;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +39,7 @@ public class inlogscherm extends AppCompatActivity {
 
 
         //definieer de buttons in inlogscherm xml bij id.
-        naam = (EditText)findViewById(R.id.et_naam);
+        naam = (EditText)findViewById(R.id.etUserEmail);
         wachtwoord = (EditText)findViewById(R.id.et_wachtwoord);
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
