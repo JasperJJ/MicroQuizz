@@ -10,19 +10,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/include"
             layout="@layout/toolbar" />
 
-    <ImageView
-        android:layout_width="145dp"
-        android:layout_height="159dp"
-        android:layout_marginEnd="-10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_right_purple_corner" />
+        <ImageView
+            android:layout_width="145dp"
+            android:layout_height="159dp"
+            android:layout_marginEnd="-10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_right_purple_corner" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -44,7 +44,7 @@
             app:srcCompat="@drawable/example_background" />
 
         <TextView
-            android:id="@+id/et_vraag"
+            android:id="@+id/tv_vraag"
             android:layout_width="357dp"
             android:layout_height="135dp"
             android:layout_marginStart="16dp"
@@ -69,10 +69,10 @@
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_vraag">
+            app:layout_constraintTop_toBottomOf="@+id/tv_vraag">
 
             <RadioButton
-                android:id="@+id/rb_vraag1"
+                android:id="@+id/rb_antwoord1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/vraag1"
@@ -80,7 +80,7 @@
                 android:visibility="visible" />
 
             <RadioButton
-                android:id="@+id/rb_vraag2"
+                android:id="@+id/rb_antwoord2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/vraag2"
@@ -88,11 +88,9 @@
                 android:visibility="visible" />
 
             <RadioButton
-                android:id="@+id/rb_vraag3"
+                android:id="@+id/rb_antwoord3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:buttonTint="#8BC34A"
-                android:checked="false"
                 android:text="@string/vraag3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:visibility="visible" />
@@ -100,12 +98,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<com.google.android.material.navigation.NavigationView
-android:id="@+id/navigation"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:layout_gravity="start"
-app:headerLayout="@layout/sidebar_header"
-app:menu="@menu/menu" />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/sidebar_header"
+        app:menu="@menu/menu" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
