@@ -104,7 +104,8 @@ public class Registatie extends AppCompatActivity {
 
         private Boolean validate() {
 
-                Boolean result = false;
+                boolean result = false;
+
                 String name = userName.getText().toString();
                 String password = userPassword.getText().toString();
                 String email = userEmail.getText().toString();

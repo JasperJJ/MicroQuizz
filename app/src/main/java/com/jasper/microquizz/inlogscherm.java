@@ -18,6 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 public class inlogscherm extends AppCompatActivity {
 
     private Button btn_inloggen;
@@ -26,6 +28,7 @@ public class inlogscherm extends AppCompatActivity {
     private EditText wachtwoord;
     private Button login;
     private TextView inlogpoging;
+    private TextView userRegistration;
     //teller voor inlogpogingen
     private int loginTeller = 3;
     private FirebaseAuth firebaseAuth;
@@ -43,15 +46,14 @@ public class inlogscherm extends AppCompatActivity {
         wachtwoord = (EditText)findViewById(R.id.et_wachtwoord);
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
-
+        userRegistration = (TextView)findViewById(R.id.tvRegister);
 
        // inlogpoging.setText("Aantal pogingen over: 5");
 
         firebaseAuth = FirebaseAuth.getInstance();
-
         progressDialog = new ProgressDialog(this);
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
         // als de gebruiker al is ingelogd gaat hij naar het startscherm.
         if (user != null) {
             finish();
@@ -60,11 +62,19 @@ public class inlogscherm extends AppCompatActivity {
 
         //findByID();
         //setBackGroundColors();
+
         // als we op login klikken dan roepen we de functie aan inlogBevestig(gebruikersnaam, gebruikerswachtwoord);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 inlogBevestig(naam.getText().toString(),wachtwoord.getText().toString());
+            }
+        });
+
+        userRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(inlogscherm.this, Registatie.class));
             }
         });
     }
