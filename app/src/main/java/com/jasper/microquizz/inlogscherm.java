@@ -44,6 +44,7 @@ public class inlogscherm extends AppCompatActivity {
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
 
+
        // inlogpoging.setText("Aantal pogingen over: 5");
 
         firebaseAuth = FirebaseAuth.getInstance();

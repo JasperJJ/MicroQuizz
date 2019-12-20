@@ -9,7 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -21,6 +27,8 @@ public class Registatie extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
 
+    private FirebaseAuth firebaseAuth;
+
 
 
 
@@ -31,12 +39,32 @@ public class Registatie extends AppCompatActivity {
         setContentView(R.layout.activity_registatie);
         setupUIViews();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()) {
                     //upload data naar de database
+                    String user_email = userEmail.getText().toString().trim();
+                    String user_password = userPassword.getText().toString().trim();
+
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(Registatie.this, inlogscherm.class));
+                            } else {
+
+                                Toast.makeText(Registatie.this, "Registreren mislukt.", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
                 }
             }
         });
