@@ -17,17 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
 
 public class Registatie extends AppCompatActivity {
-    // buttons e.d. voor registratie aanmaken
-
-    private EditText userName, userPassword, userEmail;
-    private Button regButton;
-    private TextView userLogin;
-    private FirebaseAuth firebaseAuth;
 
     private Button btn_register;
-
 
     private EditText userName, userPassword, userEmail;
     private Button regButton;
@@ -37,35 +31,14 @@ public class Registatie extends AppCompatActivity {
     // maak verbinding met de database
     private FirebaseAuth firebaseAuth;
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registatie);
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(validate()){
-                    //upload naar de database;
-                    String user_email= userEmail.getText().toString().trim();
-                    String user_password = userPassword.getText().toString().trim();
-                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if(task.isSuccessful()) {
-                                Toast.makeText(Registatie.this , "Registreren succes",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Registatie.this, Beginscherm.class));
-                            } else {
-                                Toast.makeText(Registatie.this , "Registreren niet succesvol",Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-                }
-            }
-        });
 
         // variabelen ophalen en de referentie naar de velden maken
         setupUIViews();

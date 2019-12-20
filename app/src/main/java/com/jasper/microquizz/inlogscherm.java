@@ -32,7 +32,6 @@ public class inlogscherm extends AppCompatActivity {
     //teller voor inlogpogingen
     private int loginTeller = 3;
 
-
     //inloggen database
     private FirebaseAuth firebaseAuth;
 
@@ -51,9 +50,7 @@ public class inlogscherm extends AppCompatActivity {
         wachtwoord = (EditText)findViewById(R.id.et_wachtwoord);
         login = (Button)findViewById(R.id.btn_inloggen);
         inlogpoging = (TextView)findViewById(R.id.tv_inlogpoging);
-
         userRegistration = (TextView)findViewById(R.id.tvRegister);
-
 
        // inlogpoging.setText("Aantal pogingen over: 3");
 
@@ -119,7 +116,6 @@ public class inlogscherm extends AppCompatActivity {
                         // wanneer succesvol ingelogd geef dan inloggen gelukt en verwijs naar de homeactivity
                     Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(inlogscherm.this, HomeActivity.class));
-
                 }
                 else{
 
@@ -155,21 +151,6 @@ public class inlogscherm extends AppCompatActivity {
 
         }
         */
-    }
-
-    private void checkEmailVerificatie() {
-
-        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
-        Boolean emailvlag = firebaseUser.isEmailVerified();
-
-        if (emailvlag) {
-            finish();
-            startActivity(new Intent(inlogscherm.this, HomeActivity.class));
-        }else {
-            // als gebruiker email niet heeft bevestigd dan krijgt de gebruiker een bericht
-            Toast.makeText(this, "Bevestig uw Email-adress", Toast.LENGTH_SHORT).show();
-            firebaseAuth.signOut();
-        }
     }
 
 
