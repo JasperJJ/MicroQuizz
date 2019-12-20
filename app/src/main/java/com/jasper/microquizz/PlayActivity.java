@@ -3,6 +3,9 @@ package com.jasper.microquizz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,10 @@ public class PlayActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
+    private TextView tv_vraag;
+    private RadioButton rb_antwoord1;
+    private RadioButton rb_antwoord2;
+    private RadioButton rb_antwoord3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +30,16 @@ public class PlayActivity extends AppCompatActivity {
 
         configureNavigationDrawer();
         configureToolbar();
+        initControl();
+    public void initControl() {
+        tv_vraag = findViewById(R.id.tv_vraag);
+        rb_antwoord1 = findViewById(R.id.rb_antwoord1);
+        rb_antwoord2= findViewById(R.id.rb_antwoord2);
+        rb_antwoord3 = findViewById(R.id.rb_antwoord3);
+
+//        btn_location.setOnClickListener(this);
+//        btn_play.setOnClickListener(this);
+    }
     }
 
     private void configureToolbar() {
