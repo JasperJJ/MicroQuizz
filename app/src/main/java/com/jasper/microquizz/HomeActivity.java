@@ -60,6 +60,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //logout functie om uit te roepen en te verwijzen naar het inlogscherm
+    // als je naar een ander scherm wilt gaan wanneer je uitlogd kan je dat hier toepassen
     private void Logout(){
         firebaseAuth.signOut();
         finish();
