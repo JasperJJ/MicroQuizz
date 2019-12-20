@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Micro Quizz</string>
     <string name="action_home">Home</string>
-    <string name="action_musea">Musea</string>
+    <string name="action_musea">Kies quiz</string>
     <string name="action_gegevens">Gegevens</string>
     <string name="action_feedback">Feedback</string>
     <string name="action_logout">Uitloggen</string>
