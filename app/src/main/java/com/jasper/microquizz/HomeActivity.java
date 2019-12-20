@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void Logout(){
         firebaseAuth.signOut();
         finish();
-        startActivity(new Intent(HomeActivity.this, inlogscherm.class));
+        startActivity(new Intent(HomeActivity.this, Beginscherm.class));
 
     }
 
