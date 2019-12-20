@@ -2,6 +2,7 @@ package com.jasper.microquizz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,15 +15,39 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.jasper.microquizz.models.Musea;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private DrawerLayout drawerLayout;
+
+    private Musea musea;
 
     private TextView tv_vraag;
     private RadioButton rb_antwoord1;
     private RadioButton rb_antwoord2;
     private RadioButton rb_antwoord3;
+
+    private Object[] questionID;
+    private int questionNumber = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +55,10 @@ public class PlayActivity extends AppCompatActivity {
 
         configureNavigationDrawer();
         configureToolbar();
+
         initControl();
+        getQuestions();
+        setQuestions();
     }
 
     public void initControl() {
@@ -41,6 +69,30 @@ public class PlayActivity extends AppCompatActivity {
 
 //        btn_location.setOnClickListener(this);
 //        btn_play.setOnClickListener(this);
+    }
+
+    private void getQuestions() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("musea");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Map<String, Object> values = (Map<String, Object>) dataSnapshot.getValue();
+                musea = new Musea(values);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.e(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void setQuestions() {
+
     }
 
     private void configureToolbar() {
