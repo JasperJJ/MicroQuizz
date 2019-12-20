@@ -18,7 +18,6 @@
         android:id="@+id/imageView4"
         android:layout_width="292dp"
         android:layout_height="255dp"
-        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bottom_left_blue_corner" />
@@ -59,7 +58,6 @@
         android:ems="10"
         android:hint="email"
         android:inputType="textPersonName"
-        android:textColor="#A22121"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Inloggen" />

@@ -32,7 +32,7 @@ public class PlayActivity extends AppCompatActivity {
         configureToolbar();
         initControl();
     }
-    
+
     public void initControl() {
         tv_vraag = findViewById(R.id.tv_vraag);
         rb_antwoord1 = findViewById(R.id.rb_antwoord1);
