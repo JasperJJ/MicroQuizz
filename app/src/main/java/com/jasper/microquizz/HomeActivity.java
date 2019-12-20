@@ -17,16 +17,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+
+// importeer firebase extensie
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth firebaseAuth;
     private Button logout;
-
-
     private DrawerLayout drawerLayout;
-
     private TextView tv_description;
     private Button btn_play;
     private Button btn_highscore;
@@ -38,10 +37,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // haal huidige sessie op
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //logout = (Button)findViewById(R.id.btn_highscore);
 
+// test code om via highscore uit te loggen dit kan dus voor andere doeleinde worden gebruikt.
+        //logout = (Button)findViewById(R.id.btn_highscore);
 //        logout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -57,14 +58,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         configureToolbar();
     }
 
+    //logout functie om uit te roepen en te verwijzen naar het inlogscherm
     private void Logout(){
-
         firebaseAuth.signOut();
         finish();
         startActivity(new Intent(HomeActivity.this, inlogscherm.class));
 
     }
 
+
+    // dubbele code voor het menu, dit was niet nodig en veroorzaakte problemen met het inloggen.
     //@Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu, menu);
@@ -83,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //    }
 
 
+    // zet de toolbaar in de applicatie waar de sidebar aan gekoppeld is.
     private void configureToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +98,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+    // dit is voor de sidebar als er op een menu item wordt gedrukt.
     private void configureNavigationDrawer() {
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.navigation);
@@ -102,14 +108,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.action_home) {
+                    // verwijs naar home als er op action_home wordt gedrukt.
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.action_musea) {
                     Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
+                    // verwijs naar een andere activiteit locaties.
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.uitloggen) {
+                    // als er op logout wordt gedrukt dan roepen we de uitlog functie op.
                     Logout();
                    // Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
                    // startActivity(intent);
@@ -132,6 +141,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    // een fucntie om variabelen te koppelen aan de buttons, textvieuws etc.
     public void initControl() {
         tv_description = findViewById(R.id.tv_description);
         btn_play = findViewById(R.id.btn_play);
@@ -143,6 +153,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btn_play.setOnClickListener(this);
     }
 
+
+// bepaal kleuren voor id's etc.
     public void setBackGroundColors() {
         GradientDrawable tv_description_bg = (GradientDrawable) tv_description.getBackground();
         GradientDrawable bt_play_bg = (GradientDrawable) btn_play.getBackground();
@@ -157,6 +169,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bt_plus_bg.setColor(getResources().getColor(R.color.colorGreen));
     }
 
+        // verwijzen naar andere schermen wanneer er op x wordt gedrukt.
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_play) {
