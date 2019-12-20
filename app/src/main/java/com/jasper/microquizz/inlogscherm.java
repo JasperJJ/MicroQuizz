@@ -91,12 +91,12 @@ public class inlogscherm extends AppCompatActivity {
 
     //functie voor het inloggen te verifieren
 
-    private void inlogBevestig(String gebruikersnaam, String gebruikerswachtwoord) {
+    private void inlogBevestig(String userEmail, String userPassword) {
 
         progressDialog.setMessage("Laden");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(gebruikersnaam, gebruikerswachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
