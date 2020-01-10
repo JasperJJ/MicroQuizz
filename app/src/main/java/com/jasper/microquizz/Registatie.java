@@ -110,7 +110,6 @@ public class Registatie extends AppCompatActivity {
             userEmail = (EditText)findViewById(R.id.etUserEmail);
             regButton = (Button) findViewById(R.id.btnRegister);
             userLogin = (TextView)findViewById(R.id.tvUserLogin);
-
         }
 
 
