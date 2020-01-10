@@ -3,8 +3,6 @@ package com.jasper.microquizz;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.jasper.microquizz.interfaces.LoadDataCallback;
+import com.jasper.microquizz.models.Museums;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +40,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        // Preload Quiz data
+	    App app = (App) getApplicationContext();
+	    if (app.getMuseum() == null) {
+		    new LoadMuseum(getApplicationContext(), new LoadDataCallback() {
+			    @Override
+			    public void done(Museums museums) { }
+		    });
+	    }
 
         //logout = (Button)findViewById(R.id.btn_highscore);
 
