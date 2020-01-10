@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_home">Home</string>
-    <string name="action_musea">Musea</string>
+    <string name="action_musea">Kies quiz</string>
     <string name="action_gegevens">Gegevens</string>
     <string name="action_feedback">Feedback</string>
     <string name="action_logout">Uitloggen</string>
@@ -23,7 +23,7 @@
     <string name="wachtwoord_bevestigen">Wachtwoord bevestigen</string>
     <string name="wachtwoord">Wachtwoord</string>
     <string name="gebruikersnaam">Gebruikersnaam</string>
-    <string name="vraag1">Vraag 1</string>
-    <string name="vraag2">Vraag 2</string>
-    <string name="vraag3">Vraag 3</string>
+    <string name="vraag1">Antwoord 1</string>
+    <string name="vraag2">Antwoord 2</string>
+    <string name="vraag3">Antwoord 3</string>
 </resources>
