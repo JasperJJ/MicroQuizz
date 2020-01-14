@@ -83,13 +83,13 @@ public class PlayActivity extends AppCompatActivity {
 				@Override
 				public void done(Museums museums) {
 					musea = museums;
-					quiz = musea.getQuizName();
+					quiz = musea.getQuiz();
 					setQuestions(quiz);
 				}
 			});
 		} else {
 			musea = app.getMuseum();
-			quiz = musea.getQuizName();
+			quiz = musea.getQuiz();
 			setQuestions(quiz);
 		}
 	}
@@ -104,6 +104,15 @@ public class PlayActivity extends AppCompatActivity {
 		rb_antwoord1.setText(keuze1);
 		rb_antwoord2.setText(keuze2);
 		rb_antwoord3.setText(keuze3);
+
+//		For testing
+//		System.out.println("Musea name: " + musea.getMuseaName());
+//		System.out.println("Object name: " + musea.getObjectName());
+//		System.out.println("Quiz name: " + musea.getQuiz());
+//
+//		System.out.println("Musea list: " + musea.getMuseaList());
+//		System.out.println("Object list: " + musea.getObjectList());
+//		System.out.println("Quiz list: " + musea.getQuizList());
 	}
 
 	private boolean checkAnswer(String answer) {

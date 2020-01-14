@@ -4,34 +4,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Museums {
-    private int currentMuseum;
-    private int currentObject;
-    private int currentquiz;
+    private int currentMuseumKey;
+    private int currentObjectKey;
+    private int currentquizKey;
 
     private ArrayList<String> museaList;
     private ArrayList quizlist;
     private ArrayList objectList;
 
     public Museums() {
-        this.currentMuseum = 0;
-        this.currentObject = 0;
-        this.currentquiz = 0;
+        this.currentMuseumKey = 0;
+        this.currentObjectKey = 0;
+        this.currentquizKey = 0;
     }
 
     public HashMap<String, String> nextQuiz() {
         HashMap<String, String> result = new HashMap<>();
-        currentObject++;
-        if (currentObject < ((ArrayList) this.quizlist.get(currentMuseum)).size()) {
-            result = (HashMap<String, String>) ((ArrayList) this.quizlist.get(currentMuseum)).get(currentObject);
-        }
-        if (result.size() == 0) {
-            currentObject = 0;
+        currentquizKey++;
+        if (currentquizKey < getQuizList().size()) {
+            result = getQuiz(currentMuseumKey, currentObjectKey, currentquizKey);
+        } else {
+            currentquizKey = 0;
         }
         return result;
     }
 
-    public String getMuseaName() {
-        return this.museaList.get(currentMuseum);
+	// Getters and Setter for the Mesea
+
+	public String getMuseaName() {
+        return this.museaList.get(currentMuseumKey);
     }
     public String getMuseaName(int key) {
         return this.museaList.get(key);
@@ -41,8 +42,14 @@ public class Museums {
         this.museaList = museaList;
     }
 
+	public ArrayList<String> getMuseaList() {
+		return this.museaList;
+	}
+
+	// Getters and Setter for the Object
+
     public String getObjectName() {
-        return ((ArrayList) this.objectList.get(currentMuseum)).get(currentObject).toString();
+        return ((ArrayList) this.objectList.get(currentMuseumKey)).get(currentObjectKey).toString();
     }
     public String getObjectName(int mKey, int oKey) {
         return ((ArrayList) this.objectList.get(mKey)).get(oKey).toString();
@@ -52,38 +59,53 @@ public class Museums {
         this.objectList = objectList;
     }
 
-    public HashMap<String, String> getQuizName() {
-        return (HashMap<String, String>) ((ArrayList) this.quizlist.get(currentMuseum)).get(currentObject);
+	public ArrayList<String> getObjectList() {
+		return (ArrayList<String>) this.objectList.get(currentMuseumKey);
+	}
+	public ArrayList<String> getObjectList(int mKey) {
+		return (ArrayList<String>) this.objectList.get(mKey);
+	}
+
+	// Getters and Setter for the Quiz
+
+    public HashMap<String, String> getQuiz() {
+        return (HashMap<String, String>) ((ArrayList) ((ArrayList) this.quizlist.get(currentMuseumKey)).get(currentObjectKey)).get(currentquizKey);
     }
-    public String getQuizName(int mKey, int oKey) {
-        return ((ArrayList) this.quizlist.get(mKey)).get(oKey).toString();
+    public HashMap<String, String> getQuiz(int mKey, int oKey, int qKey) {
+        return ((HashMap) ((ArrayList) ((ArrayList) this.quizlist.get(mKey)).get(oKey)).get(qKey));
     }
 
     public void setQuizlist(ArrayList quizlist) {
         this.quizlist = quizlist;
     }
 
-    public int getCurrentMuseum() {
-        return currentMuseum;
+    public ArrayList<String> getQuizList() {
+        return (ArrayList<String>) ((ArrayList) this.quizlist.get(currentMuseumKey)).get(currentObjectKey);
     }
 
-    public void setCurrentMuseum(int currentMuseum) {
-        this.currentMuseum = currentMuseum;
+    // Getters and Setters for the keys
+
+    public int getCurrentMuseumKey() {
+        return currentMuseumKey;
     }
 
-    public int getCurrentObject() {
-        return currentObject;
+    public void setCurrentMuseumKey(int currentMuseumKey) {
+        this.currentMuseumKey = currentMuseumKey;
     }
 
-    public void setCurrentObject(int currentObject) {
-        this.currentObject = currentObject;
+    public int getCurrentObjectKey() {
+        return currentObjectKey;
     }
 
-    public int getCurrentquiz() {
-        return currentquiz;
+    public void setCurrentObjectKey(int currentObjectKey) {
+        this.currentObjectKey = currentObjectKey;
     }
 
-    public void setCurrentquiz(int currentquiz) {
-        this.currentquiz = currentquiz;
+    public int getCurrentquizKey() {
+        return currentquizKey;
+    }
+
+    public void setCurrentquizKey(int currentquizKey) {
+        this.currentquizKey = currentquizKey;
     }
 }
