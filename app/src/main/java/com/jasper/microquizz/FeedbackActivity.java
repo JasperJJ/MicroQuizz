@@ -41,18 +41,20 @@ public class FeedbackActivity extends AppCompatActivity {
         btn_verstuur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Bedankt voor de feedback");
-                progressDialog.show();
+                //progressDialog.setMessage("Bedankt voor de feedback");
+               // progressDialog.show();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
                 String tekst = tekstvak.getText().toString().trim();
                 String email = emailadres.getText().toString().trim();
+                //firebase user = firebaseUser.getEmail();
+                String gebruiker = firebaseUser.getEmail().toString().replace("." , " ");
                 if (tekst.isEmpty() || email.isEmpty()) {
                     Toast.makeText(FeedbackActivity.this, "Voer alstublieft alles in", Toast.LENGTH_SHORT).show();
                 } else {
-                    mDatabase.child("feedback").child("tekst").child("0").setValue(tekst);
-                    mDatabase.child("feedback").child("email").child("0").setValue(email);
+                    mDatabase.child("feedback").child(gebruiker).child("email").setValue(email);
+                    mDatabase.child("feedback").child(gebruiker).child("tekst").setValue(tekst);
 
                     startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
                 }
