@@ -23,7 +23,7 @@ public class Registatie extends AppCompatActivity {
 
     private Button btn_register;
 
-    private EditText userName, userPassword, userEmail;
+    private EditText userName, userPassword, userPassword2, userEmail;
     private Button regButton;
     private TextView userLogin;
 
@@ -58,6 +58,7 @@ public class Registatie extends AppCompatActivity {
                     //upload data naar de database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+
 
                     // firebase functie die de email en het wachtwoord gebruikt om een account aan te maken.
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -107,6 +108,7 @@ public class Registatie extends AppCompatActivity {
         private void setupUIViews() {
             userName = (EditText)findViewById(R.id.etUserName);
             userPassword = (EditText)findViewById(R.id.et_wachtwoord);
+            userPassword2 = (EditText)findViewById(R.id.et_wachtwoord2);
             userEmail = (EditText)findViewById(R.id.etUserEmail);
             regButton = (Button) findViewById(R.id.btnRegister);
             userLogin = (TextView)findViewById(R.id.tvUserLogin);
@@ -121,15 +123,22 @@ public class Registatie extends AppCompatActivity {
 
                 String name = userName.getText().toString();
                 String password = userPassword.getText().toString();
+                String password2 = userPassword2.getText().toString();
                 String email = userEmail.getText().toString();
 
                 // als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
 
-                if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
+
+                if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
 
                     Toast.makeText(Registatie.this, "Voer alstublieft alles in",Toast.LENGTH_SHORT).show();
 
-                } else {
+                }
+                else if(!userPassword.equals(userPassword2)){
+                    Toast.makeText(Registatie.this, "Beide wachtwoorden moeten gelijk zijn..", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
                         // als alles is ingevuld dan is het result true en kan de validate functie worden aangeroepen
                         result = true;
 
@@ -149,5 +158,13 @@ public class Registatie extends AppCompatActivity {
         GradientDrawable btn_register_bg = (GradientDrawable) btn_register.getBackground();
 
         btn_register_bg.setColor(getResources().getColor(R.color.colorBlue));
+    }
+
+    public EditText getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword2(EditText userPassword2) {
+        this.userPassword = userPassword2;
     }
 }
