@@ -8,16 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
 
 public class Registatie extends AppCompatActivity {
 
@@ -27,13 +23,8 @@ public class Registatie extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
 
-
     // maak verbinding met de database
     private FirebaseAuth firebaseAuth;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,48 +96,51 @@ public class Registatie extends AppCompatActivity {
     }
 
     // defineer alle velden en buttons
-        private void setupUIViews() {
-            userName = (EditText)findViewById(R.id.etUserName);
-            userPassword = (EditText)findViewById(R.id.et_wachtwoord);
-            userPassword2 = (EditText)findViewById(R.id.et_wachtwoord2);
-            userEmail = (EditText)findViewById(R.id.etUserEmail);
-            regButton = (Button) findViewById(R.id.btnRegister);
-            userLogin = (TextView)findViewById(R.id.tvUserLogin);
+    private void setupUIViews() {
+        userName = (EditText)findViewById(R.id.etUserName);
+        userPassword = (EditText)findViewById(R.id.et_wachtwoord);
+        userPassword2 = (EditText)findViewById(R.id.et_wachtwoord2);
+        userEmail = (EditText)findViewById(R.id.etUserEmail);
+        regButton = (Button) findViewById(R.id.btnRegister);
+        userLogin = (TextView)findViewById(R.id.tvUserLogin);
 
-        }
+    }
 
+	// valideer functie voor het registeren
+	private Boolean validate() {
+		boolean hasError = true;
+		String message = "";
 
-        // valideer functie voor het registeren
-        private Boolean validate() {
+		String name = userName.getText().toString().trim();
+		String password = userPassword.getText().toString().trim();
+		String password2 = userPassword2.getText().toString().trim();
+		String email = userEmail.getText().toString().trim();
 
-                boolean result = false;
+		// als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
+		if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
+			message = "Voer alstublieft alles in";
 
-                String name = userName.getText().toString();
-                String password = userPassword.getText().toString();
-                String password2 = userPassword2.getText().toString();
-                String email = userEmail.getText().toString();
+		} else if (!isEmailValid(email)) {
+			message = "Geen geldig e-mailadres";
 
-                // als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
+		} else if (!password.equals(password2)) {
+			message = "Beide wachtwoorden moeten gelijk zijn..";
 
+		} else {
+			hasError = false;
+		}
 
-                if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
+		if (hasError) {
+			Toast.makeText(Registatie.this, message, Toast.LENGTH_SHORT).show();
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-                    Toast.makeText(Registatie.this, "Voer alstublieft alles in",Toast.LENGTH_SHORT).show();
-
-                }
-                else if(!userPassword.equals(userPassword2)){
-                    Toast.makeText(Registatie.this, "Beide wachtwoorden moeten gelijk zijn..", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                        // als alles is ingevuld dan is het result true en kan de validate functie worden aangeroepen
-                        result = true;
-
-                }
-
-                return result;
-        }
-
+	boolean isEmailValid(CharSequence email) {
+		return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+	}
 
     // btnRegister knop toewijzen aan variabele
     public void findByID() {
