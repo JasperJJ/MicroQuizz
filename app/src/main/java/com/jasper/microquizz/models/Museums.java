@@ -29,7 +29,7 @@ public class Museums {
         return result;
     }
 
-	// Getters and Setter for the Mesea
+	// Getters and Setter for the Musea
 
 	public String getMuseaName() {
         return this.museaList.get(currentMuseumKey);
