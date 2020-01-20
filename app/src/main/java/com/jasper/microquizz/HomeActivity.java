@@ -120,10 +120,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.action_musea) {
-                    Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
-                    // verwijs naar een andere activiteit locaties.
-                    startActivity(intent);
-                    return true;
+                        Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
+                        // verwijs naar een andere activiteit locaties.
+                        startActivity(intent);
+                        return true;
                 }else if (itemId == R.id.action_feedback) {
                     Intent intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                     // verwijs naar een andere activiteit locaties.
@@ -160,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btn_plus = findViewById(R.id.btn_plus);
 
         btn_location.setOnClickListener(this);
+        btn_highscore.setOnClickListener(this);
         btn_play.setOnClickListener(this);
     }
 
@@ -187,6 +188,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             this.startActivity(intent);
         } else if (v.getId() == R.id.btn_location) {
             Intent intent = new Intent(this, museumKiezen.class);
+            this.startActivity(intent);
+
+        } else if (v.getId() == R.id.btn_highscore) {
+            Intent intent = new Intent(this, HighscoreActivity.class);
             this.startActivity(intent);
         }
     }
