@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.jasper.microquizz.R;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -52,11 +54,9 @@ public class museumAdapter extends RecyclerView.Adapter<museumAdapter.MyViewHold
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public museumAdapter(Context context, List<String> myDatasetName, List<String> myDatasetInfo, List<String> myDatasetImage) {
+    public museumAdapter(Context context, ArrayList<String> myDatasetName) {
         this.mInflater = LayoutInflater.from(context);
         mDatasetName = myDatasetName;
-        mDatasetInfo = myDatasetInfo;
-        mDatasetImage = myDatasetImage;
     }
 
     // Create new views (invoked by the layout manager)
@@ -75,13 +75,6 @@ public class museumAdapter extends RecyclerView.Adapter<museumAdapter.MyViewHold
         // - replace the contents of the view with that element
         String name = mDatasetName.get(position);
         holder.nameView.setText(name);
-
-        String info = mDatasetInfo.get(position);
-        holder.infoView.setText(info);
-
-        byte[] imageBytes = Base64.decode(mDatasetImage.get(position), Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        holder.imageView.setImageBitmap(decodedImage);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
