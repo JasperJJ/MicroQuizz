@@ -307,10 +307,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         String[] parts = builder.toString().split(",");
-        String musea = parts[0].split("=")[1];
-        String object = parts[1].split("=")[1];
-        String quiz = parts[2].split("=")[1];
+        String museaKey = parts[0].split("=")[1];
+        String objectKey = parts[1].split("=")[1];
+        String quizKey = parts[2].split("=")[1];
         String bltID = parts[3].split("=")[1];
+
+        App app = (App) getApplicationContext();
+        Museums museum = app.getMuseum();
+        museum.setCurrentMuseumKey(Integer.parseInt(museaKey));
+        museum.setCurrentObjectKey(Integer.parseInt(objectKey));
+        museum.setCurrentquizKey(Integer.parseInt(quizKey));
 
         if (mBlue.startConnection(bltID))
             setLoading();
