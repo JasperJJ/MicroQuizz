@@ -1,246 +1,341 @@
 package com.jasper.microquizz;
 
-import android.app.PendingIntent;
+import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
+import static android.bluetooth.BluetoothAdapter.STATE_DISCONNECTED;
+
+import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.MifareClassic;
-import android.nfc.tech.MifareUltralight;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.provider.Settings;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.jasper.microquizz.interfaces.ParsedNdefRecord;
-import com.jasper.microquizz.nfc.parser.NdefMessageParser;
-import java.util.List;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 public class NFCActivity extends AppCompatActivity {
 
-	private NfcAdapter nfcAdapter;
-	private TextView text;
-	private PendingIntent pendingIntent;
+	// Bluetooth
+	private TextView mBluetoothStatus;
 
+	private BluetoothAdapter mBTAdapter;
+	private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
+	private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
+	private Handler mHandler; // Our main handler that will receive callback notifications
+
+	private static final UUID BTMODULEUUID = UUID
+			.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
+	// #defines for identifying shared types between calling functions
+
+	private final static int REQUEST_ENABLE_BT = 1; // used to identify adding bluetooth names
+	private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
+	private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
+
+
+	private BluetoothManager bluetoothManager;
+	private BluetoothAdapter bluetoothAdapter;
+	private String bluetoothDeviceAddress;
+	private BluetoothGatt bluetoothGatt;
+	private int connectionState = STATE_DISCONNECTED;
+
+	private final static String TAG = NFCActivity.class.getSimpleName();
+
+	public final static String ACTION_GATT_CONNECTED =
+			"com.example.bluetooth.le.ACTION_GATT_CONNECTED";
+	public final static String ACTION_GATT_DISCONNECTED =
+			"com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
+	public final static String ACTION_GATT_SERVICES_DISCOVERED =
+			"com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
+	public final static String ACTION_DATA_AVAILABLE =
+			"com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
+	public final static String EXTRA_DATA =
+			"com.example.bluetooth.le.EXTRA_DATA";
+	public final static UUID UUID_HEART_RATE_MEASUREMENT =
+			UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+
+	@SuppressLint("HandlerLeak")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nfc);
 
-		text = findViewById(R.id.text);
-		nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		// Bluetooth
+		mBluetoothStatus = findViewById(R.id.bluetoothStatus);
+		final BluetoothManager bluetoothManager =
+				(BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+		mBTAdapter = bluetoothManager.getAdapter();
 
-		if (nfcAdapter == null) {
-			Toast.makeText(this, "No NFC", Toast.LENGTH_SHORT).show();
-			finish();
-			return;
-		}
+//		mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
-		pendingIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, this.getClass())
-						.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-
-		if (nfcAdapter != null) {
-			if (!nfcAdapter.isEnabled()) {
-				showWirelessSettings();
-			}
-
-			nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
-		}
-	}
-
-	private void showWirelessSettings() {
-		Toast.makeText(this, "You need to enable NFC", Toast.LENGTH_SHORT).show();
-		Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-		startActivity(intent);
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		setIntent(intent);
-		resolveIntent(intent);
-	}
-
-	private void resolveIntent(Intent intent) {
-		String action = intent.getAction();
-
-		if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
-				|| NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
-				|| NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
-			Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-			NdefMessage[] msgs;
-
-			if (rawMsgs != null) {
-				msgs = new NdefMessage[rawMsgs.length];
-
-				for (int i = 0; i < rawMsgs.length; i++) {
-					msgs[i] = (NdefMessage) rawMsgs[i];
+		mHandler = new Handler() {
+			public void handleMessage(android.os.Message msg) {
+				if (msg.what == MESSAGE_READ) {
+					String readMessage = null;
+					try {
+						readMessage = new String((byte[]) msg.obj, "UTF-8");
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					Log.e("bluetooth", "handleMessage: " + readMessage);
+//					mReadBuffer.setText();
 				}
 
-			} else {
-				byte[] empty = new byte[0];
-				byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
-				Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-				byte[] payload = dumpTagData(tag).getBytes();
-				NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-				NdefMessage msg = new NdefMessage(new NdefRecord[] {record});
-				msgs = new NdefMessage[] {msg};
+				if (msg.what == CONNECTING_STATUS) {
+					if (msg.arg1 == 1) {
+						mBluetoothStatus.setText("Connected to Device: " + (String) ( msg.obj ));
+					} else {
+						mBluetoothStatus.setText("Connection Failed");
+					}
+				}
 			}
+		};
 
-			displayMsgs(msgs);
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+				!= PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this,
+					new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 		}
+		startConnection("F1:1F:AE:B0:8A:7A");
 	}
 
-	private void displayMsgs(NdefMessage[] msgs) {
-		if (msgs == null || msgs.length == 0) {
+	private void broadcastUpdate(final String action) {
+		final Intent intent = new Intent(action);
+		sendBroadcast(intent);
+	}
+
+	private void broadcastUpdate(final String action,
+			final BluetoothGattCharacteristic characteristic) {
+		final Intent intent = new Intent(action);
+
+		// This is special handling for the Heart Rate Measurement profile. Data
+		// parsing is carried out as per profile specifications.
+		if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+			int flag = characteristic.getProperties();
+			int format = -1;
+			if ((flag & 0x01) != 0) {
+				format = BluetoothGattCharacteristic.FORMAT_UINT16;
+				Log.d(TAG, "Heart rate format UINT16.");
+			} else {
+				format = BluetoothGattCharacteristic.FORMAT_UINT8;
+				Log.d(TAG, "Heart rate format UINT8.");
+			}
+			final int heartRate = characteristic.getIntValue(format, 1);
+			Log.d(TAG, String.format("Received heart rate: %d", heartRate));
+			intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
+		} else {
+			// For all other profiles, writes the data formatted in HEX.
+			final byte[] data = characteristic.getValue();
+			if (data != null && data.length > 0) {
+				final StringBuilder stringBuilder = new StringBuilder(data.length);
+				for(byte byteChar : data)
+					stringBuilder.append(String.format("%02X ", byteChar));
+				intent.putExtra(EXTRA_DATA, new String(data) + "\n" +
+						stringBuilder.toString());
+			}
+		}
+		sendBroadcast(intent);
+	}
+
+
+	// Bluetooth
+	public void startConnection(final String rawAddress) {
+
+		close();
+
+		if (!mBTAdapter.isEnabled()) {
+			Toast.makeText(getBaseContext(), "Bluetooth not on", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
-		StringBuilder builder = new StringBuilder();
-		List<ParsedNdefRecord> records = NdefMessageParser.parse(msgs[0]);
-		final int size = records.size();
+		mBluetoothStatus.setText("Connecting...");
 
-		for (int i = 0; i < size; i++) {
-			ParsedNdefRecord record = records.get(i);
-			String str = record.str();
-			builder.append(str).append("\n");
-		}
+		final String address = rawAddress.substring(0, 17);
+		// Spawn a new thread to avoid blocking the GUI one
+		new Thread() {
+			public void run() {
+				boolean fail = false;
 
-		text.setText(builder.toString());
-	}
+				Log.e("bluetooth", "" + BluetoothAdapter.checkBluetoothAddress(address));
+				BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+				final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+					@Override
+					public void onConnectionStateChange(BluetoothGatt gatt, int status,
+							int newState) {
+						String intentAction;
+						if (newState == BluetoothProfile.STATE_CONNECTED) {
+							intentAction = ACTION_GATT_CONNECTED;
+							connectionState = STATE_CONNECTED;
+							broadcastUpdate(intentAction);
+							Log.i(TAG, "Connected to GATT server.");
+							Log.i(TAG, "Attempting to start service discovery:" +
+									bluetoothGatt.discoverServices());
 
-	private String dumpTagData(Tag tag) {
-		StringBuilder sb = new StringBuilder();
-		byte[] id = tag.getId();
-		sb.append("ID (hex): ").append(toHex(id)).append('\n');
-		sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
-		sb.append("ID (dec): ").append(toDec(id)).append('\n');
-		sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
+						} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+							intentAction = ACTION_GATT_DISCONNECTED;
+							connectionState = STATE_DISCONNECTED;
+							Log.i(TAG, "Disconnected from GATT server.");
+							broadcastUpdate(intentAction);
+						}
+					}
 
-		String prefix = "android.nfc.tech.";
-		sb.append("Technologies: ");
-		for (String tech : tag.getTechList()) {
-			sb.append(tech.substring(prefix.length()));
-			sb.append(", ");
-		}
+					@Override
+					// New services discovered
+					public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+						if (status == BluetoothGatt.GATT_SUCCESS) {
+							broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
+						} else {
+							Log.w(TAG, "onServicesDiscovered received: " + status);
+						}
+					}
 
-		sb.delete(sb.length() - 2, sb.length());
+					@Override
+					// Result of a characteristic read operation
+					public void onCharacteristicRead(BluetoothGatt gatt,
+							BluetoothGattCharacteristic characteristic,
+							int status) {
+						if (status == BluetoothGatt.GATT_SUCCESS) {
+							broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
+						}
+					}
 
-		for (String tech : tag.getTechList()) {
-			if (tech.equals(MifareClassic.class.getName())) {
-				sb.append('\n');
-				String type = "Unknown";
+				};
+				bluetoothGatt = device.connectGatt(getBaseContext(), false, gattCallback);
 
 				try {
-					MifareClassic mifareTag = MifareClassic.get(tag);
-
-					switch (mifareTag.getType()) {
-						case MifareClassic.TYPE_CLASSIC:
-							type = "Classic";
-							break;
-						case MifareClassic.TYPE_PLUS:
-							type = "Plus";
-							break;
-						case MifareClassic.TYPE_PRO:
-							type = "Pro";
-							break;
+					mBTSocket = createBluetoothSocket(device);
+				} catch (IOException e) {
+					fail = true;
+					Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT)
+					     .show();
+				}
+				// Establish the Bluetooth socket connection.
+				try {
+					mBTSocket.connect();
+				} catch (IOException e) {
+					try {
+						fail = true;
+						mBTSocket.close();
+						mHandler.obtainMessage(CONNECTING_STATUS, -1, -1)
+						        .sendToTarget();
+					} catch (IOException e2) {
+						//insert code to deal with this
+						Toast.makeText(getBaseContext(), "Socket creation failed",
+								Toast.LENGTH_SHORT).show();
 					}
-					sb.append("Mifare Classic type: ");
-					sb.append(type);
-					sb.append('\n');
+				}
+				if (fail == false) {
+					mConnectedThread = new ConnectedThread(mBTSocket);
+					mConnectedThread.start();
 
-					sb.append("Mifare size: ");
-					sb.append(mifareTag.getSize()).append(" bytes");
-					sb.append('\n');
-
-					sb.append("Mifare sectors: ");
-					sb.append(mifareTag.getSectorCount());
-					sb.append('\n');
-
-					sb.append("Mifare blocks: ");
-					sb.append(mifareTag.getBlockCount());
-				} catch (Exception e) {
-					sb.append("Mifare classic error: ").append(e.getMessage());
+					mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, "NameHere")
+					        .sendToTarget();
 				}
 			}
+		}.start();
+	}
 
-			if (tech.equals(MifareUltralight.class.getName())) {
-				sb.append('\n');
-				MifareUltralight mifareUlTag = MifareUltralight.get(tag);
-				String type = "Unknown";
-				switch (mifareUlTag.getType()) {
-					case MifareUltralight.TYPE_ULTRALIGHT:
-						type = "Ultralight";
-						break;
-					case MifareUltralight.TYPE_ULTRALIGHT_C:
-						type = "Ultralight C";
-						break;
+	private class ConnectedThread extends Thread {
+
+		private final BluetoothSocket mmSocket;
+		private final InputStream mmInStream;
+		private final OutputStream mmOutStream;
+
+		public ConnectedThread(BluetoothSocket socket) {
+			mmSocket = socket;
+			InputStream tmpIn = null;
+			OutputStream tmpOut = null;
+
+			// Get the input and output streams, using temp objects because
+			// member streams are final
+			try {
+				tmpIn = socket.getInputStream();
+				tmpOut = socket.getOutputStream();
+			} catch (IOException e) {
+			}
+
+			mmInStream = tmpIn;
+			mmOutStream = tmpOut;
+		}
+
+		public void run() {
+			byte[] buffer = new byte[1024];  // buffer store for the stream
+			int bytes; // bytes returned from read()
+			// Keep listening to the InputStream until an exception occurs
+			while (true) {
+				try {
+					// Read from the InputStream
+					bytes = mmInStream.available();
+					if (bytes != 0) {
+						buffer = new byte[1024];
+						SystemClock
+								.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
+						bytes = mmInStream.available(); // how many bytes are ready to be read?
+						bytes = mmInStream
+								.read(buffer, 0, bytes); // record how many bytes we actually read
+						mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
+						        .sendToTarget(); // Send the obtained bytes to the UI activity
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+
+					break;
 				}
-				sb.append("Mifare Ultralight type: ");
-				sb.append(type);
 			}
 		}
 
-		return sb.toString();
+		/* Call this from the main activity to send data to the remote device */
+		public void write(String input) {
+			byte[] bytes = input.getBytes();           //converts entered String into bytes
+			try {
+				mmOutStream.write(bytes);
+			} catch (IOException e) {
+			}
+		}
+
+		/* Call this from the main activity to shutdown the connection */
+		public void cancel() {
+			try {
+				mmSocket.close();
+			} catch (IOException e) {
+			}
+		}
 	}
 
-	private String toHex(byte[] bytes) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = bytes.length - 1; i >= 0; --i) {
-			int b = bytes[i] & 0xff;
-			if (b < 0x10) {
-				sb.append('0');
-			}
-			sb.append(Integer.toHexString(b));
-			if (i > 0) {
-				sb.append(" ");
-			}
-		}
-		return sb.toString();
+	private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+		return device.createRfcommSocketToServiceRecord(BTMODULEUUID);
+		//creates secure outgoing connection with BT device using UUID
 	}
 
-	private String toReversedHex(byte[] bytes) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < bytes.length; ++i) {
-			if (i > 0) {
-				sb.append(" ");
-			}
-			int b = bytes[i] & 0xff;
-			if (b < 0x10) {
-				sb.append('0');
-			}
-			sb.append(Integer.toHexString(b));
+	private void close() {
+		if (bluetoothGatt == null) {
+			return;
 		}
-		return sb.toString();
+		bluetoothGatt.close();
+		bluetoothGatt = null;
 	}
 
-	private long toDec(byte[] bytes) {
-		long result = 0;
-		long factor = 1;
-		for (byte aByte : bytes) {
-			long value = aByte & 0xffL;
-			result += value * factor;
-			factor *= 256L;
-		}
-		return result;
-	}
-
-	private long toReversedDec(byte[] bytes) {
-		long result = 0;
-		long factor = 1;
-		for (int i = bytes.length - 1; i >= 0; --i) {
-			long value = bytes[i] & 0xffL;
-			result += value * factor;
-			factor *= 256L;
-		}
-		return result;
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		close();
+		finish();
 	}
 }
