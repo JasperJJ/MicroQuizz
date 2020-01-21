@@ -26,6 +26,7 @@ public class inlogscherm extends AppCompatActivity {
     private EditText mWachtwoord;
     private Button login;
     private TextView userRegistration;
+    private TextView userForgot;
 
     //teller voor inlogpogingen
     private int loginTeller = 3;
@@ -48,6 +49,7 @@ public class inlogscherm extends AppCompatActivity {
         mWachtwoord = findViewById(R.id.et_wachtwoord);
         login = findViewById(R.id.btn_inloggen);
         userRegistration = findViewById(R.id.tvRegister);
+        userForgot = findViewById(R.id.tvForgot);
 
         // inlogpoging.setText("Aantal pogingen over: 3");
 
@@ -87,6 +89,12 @@ public class inlogscherm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(inlogscherm.this, Registatie.class));
+            }
+        });
+
+        userForgot.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(inlogscherm.this, Forgot.class));
             }
         });
     }
