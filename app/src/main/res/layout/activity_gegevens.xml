@@ -10,19 +10,19 @@
         android:id="@+id/shownaam"
         android:layout_width="119dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="256dp"
         android:text="naam"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bNaam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="80dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/rounded_corners"
         android:text="Pas aan"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +32,8 @@
         android:id="@+id/e-mailadres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="104dp"
         android:text="e-mailadres"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,9 +42,9 @@
     <TextView
         android:id="@+id/showemail"
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="116dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="152dp"
         android:text="uw@email"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,9 @@
 
     <Button
         android:id="@+id/bEmail"
-        android:layout_width="88dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="80dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_corners"
         android:text="Pas aan"
@@ -96,90 +96,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.004" />
 
-    <EditText
-        android:id="@+id/wwHuidig"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="264dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="336dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="424dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/naam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="224dp"
         android:text="Gebruikersnaam"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="236dp"
-        android:text="Huidig wachtwoord"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="304dp"
-        android:text="Nieuw wachtwoord"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="392dp"
-        android:text="Herhaal wachtwoord"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="116dp"
-        android:text="uw@email"
-        android:textSize="14sp"
+        android:layout_width="274dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/rounded_corners_with_stroke"
+        android:text=""
+        android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-        app:
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".gegevens"></activity>
+        <activity android:name=".WachtwoordWijzig"></activity>
+        <activity android:name=".gegevens" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".LocatiesActivity" />
         <activity android:name=".museumKiezen" />

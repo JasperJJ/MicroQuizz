@@ -9,10 +9,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ public class gegevens extends AppCompatActivity {
     private Button bVerwijder;
     private TextView showemail;
     private Button bEmail;
+    private EditText editEmail;
 
 
     @Override
@@ -54,10 +58,11 @@ public class gegevens extends AppCompatActivity {
             }
         });
 
+        boolean email = false;
         bEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //veranderEmail();
+                veranderEmail();
             }
         });
 
@@ -72,6 +77,7 @@ public class gegevens extends AppCompatActivity {
         bVerwijder= findViewById(R.id.bVerwijder);
         showemail = findViewById(R.id.showemail);
         bEmail = findViewById(R.id.bEmail);
+        editEmail = findViewById(R.id.editEmail);
     }
 
     private void Logout(){
@@ -119,6 +125,38 @@ public class gegevens extends AppCompatActivity {
         });
         builder.show();
     }
+
+    private void veranderEmail(){
+        showemail.setVisibility(View.INVISIBLE);
+        editEmail.setVisibility(View.VISIBLE);
+        bEmail.setText("verstuur");
+
+        bEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+                //AuthCredential credential = EmailAuthProvider
+                       // .getCredential(firebaseUser.getEmail().toString(), "password1234");
+                //firebaseUser.reauthenticate(credential);
+
+                String nieuwEmail = editEmail.getText().toString();
+                firebaseUser.updateEmail(nieuwEmail);
+
+                
+
+
+                String gebruiker = firebaseUser.getEmail().toString();
+                showemail.setText(gebruiker);
+
+                editEmail.setVisibility(View.INVISIBLE);
+                showemail.setVisibility(View.VISIBLE);
+                bEmail.setText("pas aan");
+            }
+        });
+    }
+
 
     public void setBackGroundColors() {
         GradientDrawable bVerwijder_bg = (GradientDrawable) bVerwijder.getBackground();
