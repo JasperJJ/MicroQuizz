@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".FeedbackActivity">
+
+  <ImageView
+    android:layout_width="145dp"
+    android:layout_height="159dp"
+    android:layout_marginEnd="-10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/top_right_purple_corner" />
+
+  <ImageView
+    android:id="@+id/imageView4"
+    android:layout_width="292dp"
+    android:layout_height="255dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:srcCompat="@drawable/bottom_left_blue_corner" />
+
+  <Button
+    android:id="@+id/btn_verstuur"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    android:background="@drawable/rounded_corners"
+    android:text="@string/send"
+    android:textColor="@android:color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/ET_tekstvak" />
+
+  <TextView
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="92dp"
+    android:layout_marginEnd="16dp"
+    android:text="@string/your_feedback"
+    android:textSize="24sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.312"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+    android:id="@+id/ET_tekstvak"
+    android:layout_width="322dp"
+    android:layout_height="214dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="16dp"
+    android:background="@drawable/rounded_corners_with_stroke"
+    android:ems="10"
+    android:gravity="start|top"
+    android:inputType="textMultiLine"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.505"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+  <ImageView
+    android:id="@+id/ivBack"
+    android:layout_width="28dp"
+    android:layout_height="23dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/ic_back_arrow_black_24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

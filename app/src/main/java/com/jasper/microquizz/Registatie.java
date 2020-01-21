@@ -59,6 +59,7 @@ public class Registatie extends AppCompatActivity {
                             //als registratie succesvol is geef melding registreren succevol en stuur door naar inlogscherm
                             if (task.isSuccessful()) {
                                 Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(Registatie.this, inlogscherm.class));
                             } else {
                                 // als niet succesvol dan is het registreren mislukt.
@@ -103,7 +104,6 @@ public class Registatie extends AppCompatActivity {
         userEmail = (EditText)findViewById(R.id.etUserEmail);
         regButton = (Button) findViewById(R.id.btnRegister);
         userLogin = (TextView)findViewById(R.id.tvUserLogin);
-
     }
 
 	// valideer functie voor het registeren

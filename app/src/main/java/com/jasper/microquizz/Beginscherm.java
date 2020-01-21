@@ -24,9 +24,8 @@ public class Beginscherm extends AppCompatActivity {
         initControl();
         setBackGroundColors();
 
-        /*
-        // poging tot het onthouden van het inloggen in het beginscherm te doen
-        // zorgt er voor dat de app crashed
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser gebruiker = firebaseAuth.getCurrentUser();
         // als de gebruiker al is ingelogd gaat hij naar het homescherm.
@@ -34,7 +33,7 @@ public class Beginscherm extends AppCompatActivity {
             finish();
             startActivity(new Intent(Beginscherm.this, HomeActivity.class));
         }
-        */
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -189,14 +189,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     // verwijs naar een andere activiteit locaties.
                     startActivity(intent);
                     return true;
-                } else if (itemId == R.id.uitloggen) {
+                }else if (itemId == R.id.action_feedback) {
+                    Intent intent = new Intent(HomeActivity.this, FeedbackActivity.class);
+                    // verwijs naar een andere activiteit locaties.
+                    startActivity(intent);
+                    return true;
+                }else if (itemId == R.id.uitloggen) {
                     // als er op logout wordt gedrukt dan roepen we de uitlog functie op.
                     Logout();
                    // Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
                    // startActivity(intent);
                     return true;
-
-
                 }
                 return false;
             }

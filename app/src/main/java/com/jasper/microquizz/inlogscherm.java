@@ -119,6 +119,7 @@ public class inlogscherm extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     // wanneer succesvol ingelogd geef dan inloggen gelukt en verwijs naar de homeactivity
                     Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
+                    finish();
                     startActivity(new Intent(inlogscherm.this, HomeActivity.class));
                 } else {
 
