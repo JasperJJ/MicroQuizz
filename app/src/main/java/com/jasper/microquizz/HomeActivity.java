@@ -184,11 +184,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                     return true;
-                } else if (itemId == R.id.action_musea) {
-                    Intent intent = new Intent(HomeActivity.this, LocatiesActivity.class);
-                    // verwijs naar een andere activiteit locaties.
-                    startActivity(intent);
-                    return true;
                 }else if (itemId == R.id.action_feedback) {
                     Intent intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                     // verwijs naar een andere activiteit locaties.
