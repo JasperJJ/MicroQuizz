@@ -26,4 +26,6 @@
     <string name="vraag1">Antwoord 1</string>
     <string name="vraag2">Antwoord 2</string>
     <string name="vraag3">Antwoord 3</string>
+    <string name="send">Verstuur</string>
+    <string name="your_feedback">Voer hier uw feedback in:</string>
 </resources>
