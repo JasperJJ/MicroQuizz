@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registatie extends AppCompatActivity {
 
@@ -49,6 +51,7 @@ public class Registatie extends AppCompatActivity {
                     //upload data naar de database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+                    final String user_name = userName.getText().toString().trim();
 
 
                     // firebase functie die de email en het wachtwoord gebruikt om een account aan te maken.
@@ -58,9 +61,33 @@ public class Registatie extends AppCompatActivity {
 
                             //als registratie succesvol is geef melding registreren succevol en stuur door naar inlogscherm
                             if (task.isSuccessful()) {
-                                Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(Registatie.this, inlogscherm.class));
+
+
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(user_name)
+
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                  //  Log.d(TAG, "User profile updated.");
+
+                                                    Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(new Intent(Registatie.this, inlogscherm.class));
+                                                }
+                                            }
+                                        });
+
+
+
+
+
                             } else {
                                 // als niet succesvol dan is het registreren mislukt.
                                 Toast.makeText(Registatie.this, "Registreren mislukt.", Toast.LENGTH_SHORT).show();
@@ -68,6 +95,8 @@ public class Registatie extends AppCompatActivity {
 
                         }
                     });
+
+
 
                 }
             }
