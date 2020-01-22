@@ -46,6 +46,7 @@ public class gegevens extends AppCompatActivity {
     private EditText editEmail;
     private ProgressDialog progressDialog;
     private DrawerLayout drawerLayout;
+    private Button bWachtwoord;
 
 
     @Override
@@ -66,21 +67,27 @@ public class gegevens extends AppCompatActivity {
         bUitloggen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logout();
+                popUpuitlog();
             }
         });
         bVerwijder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                popUp();
+                popUpverwijder();
             }
         });
 
-        boolean email = false;
         bEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 veranderEmail();
+            }
+        });
+        bWachtwoord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(new Intent(gegevens.this, WachtwoordWijzig.class));
             }
         });
 
@@ -96,6 +103,7 @@ public class gegevens extends AppCompatActivity {
         showemail = findViewById(R.id.showemail);
         bEmail = findViewById(R.id.bEmail);
         editEmail = findViewById(R.id.editEmail);
+        bWachtwoord = findViewById(R.id.bWachtwoord);
     }
 
     private void Logout(){
@@ -122,7 +130,7 @@ public class gegevens extends AppCompatActivity {
 
     }
 
-    private void popUp(){
+    private void popUpverwijder(){
         AlertDialog.Builder builder = new AlertDialog.Builder(gegevens.this);
 
         builder.setCancelable(true);
@@ -143,71 +151,97 @@ public class gegevens extends AppCompatActivity {
         });
         builder.show();
     }
+    private void popUpuitlog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(gegevens.this);
 
-    private void veranderEmail(){
-        showemail.setVisibility(View.INVISIBLE);
-        editEmail.setVisibility(View.VISIBLE);
-        bEmail.setText("verstuur");
-        progressDialog = new ProgressDialog(this);
-        bEmail.setOnClickListener(new View.OnClickListener() {
+        builder.setCancelable(true);
+        builder.setTitle("Weet je zeker dat je wilt uitloggen?");
+
+        builder.setNegativeButton("nee", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                firebaseAuth = FirebaseAuth.getInstance();
-                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
-
-                //AuthCredential credential = EmailAuthProvider
-                       // .getCredential(firebaseUser.getEmail().toString(), "password1234");
-                //firebaseUser.reauthenticate(credential);
-
-
-                String nieuwEmail = editEmail.getText().toString().trim();
-
-
-
-                editEmail.setVisibility(View.INVISIBLE);
-                showemail.setVisibility(View.VISIBLE);
-                bEmail.setText("pas aan");
-
-                if (editEmail.getText().toString().isEmpty()) {
-                    Toast.makeText(gegevens.this, "Voer astublieft uw emailadres in", Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-
-                    progressDialog.setMessage("Laden");
-                    //laat het laden zien
-                    progressDialog.show();
-
-
-                    firebaseUser.updateEmail(nieuwEmail).addOnCompleteListener(new OnCompleteListener<Void>(){
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressDialog.dismiss();
-                            if (task.isSuccessful()) {
-
-                                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                                String gebruiker = firebaseUser.getEmail().toString();
-                                showemail.setText(gebruiker);
-
-                                editEmail.setVisibility(View.INVISIBLE);
-                                showemail.setVisibility(View.VISIBLE);
-                                bEmail.setText("pas aan");
-                                Toast.makeText(gegevens.this, "Emailadres wijzigen is gelukt", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(gegevens.this, "Emailadres wijzigen is niet gelukt", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-
-
-
-
-                 }
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
             }
         });
+
+        builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Logout();
+            }
+        });
+        builder.show();
+    }
+
+    private void veranderEmail(){
+            boolean geklikt = true;
+            showemail.setVisibility(View.INVISIBLE);
+            editEmail.setVisibility(View.VISIBLE);
+            bEmail.setText("verstuur");
+            progressDialog = new ProgressDialog(this);
+
+
+        if (geklikt) {
+            bEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(firebaseUser.getEmail().toString(), "123456");
+                    firebaseUser.reauthenticate(credential);
+
+
+                    String nieuwEmail = editEmail.getText().toString().trim();
+
+
+                    //editEmail.setVisibility(View.INVISIBLE);
+                    //showemail.setVisibility(View.VISIBLE);
+                    //bEmail.setText("pas aan");
+
+                    if (editEmail.getText().toString().isEmpty()) {
+                        Toast.makeText(gegevens.this, "Voer astublieft uw emailadres in", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        progressDialog.setMessage("Laden");
+                        //laat het laden zien
+                        progressDialog.show();
+
+
+                        firebaseUser.updateEmail(nieuwEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+
+                                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                    String gebruiker = firebaseUser.getEmail().toString();
+                                    showemail.setText(gebruiker);
+
+                                    editEmail.setVisibility(View.INVISIBLE);
+                                    showemail.setVisibility(View.VISIBLE);
+                                    bEmail.setText("pas aan");
+                                    editEmail.setText("");
+                                    //veranderd = true;
+
+                                    Toast.makeText(gegevens.this, "Emailadres wijzigen is gelukt", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(gegevens.this, "Emailadres wijzigen is niet gelukt, probeer opnieuw", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+
+
+                    }
+
+                }
+            });
+            geklikt = false;
+        }
     }
 
 

@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/bWachtwoord2"
+        android:id="@+id/bWachtwoord"
         android:layout_width="223dp"
         android:layout_height="43dp"
         android:layout_marginTop="400dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/wwHerhaal"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/wwHuidig2"
+        android:id="@+id/wwHuidig"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/wwNieuw"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
