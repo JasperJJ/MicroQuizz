@@ -31,6 +31,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,6 +45,9 @@ public class gegevens extends AppCompatActivity {
     private TextView showemail;
     private Button bEmail;
     private EditText editEmail;
+    private TextView showNaam;
+    private Button bNaam;
+    private EditText editNaam;
     private ProgressDialog progressDialog;
     private DrawerLayout drawerLayout;
     private Button bWachtwoord;
@@ -61,8 +65,10 @@ public class gegevens extends AppCompatActivity {
         configureToolbar();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-        String gebruiker = firebaseUser.getEmail().toString();
-        showemail.setText(gebruiker);
+        String email = firebaseUser.getEmail().toString();
+        String naam = firebaseUser.getDisplayName();
+        showemail.setText(email);
+        showNaam.setText(naam);
 
         bUitloggen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +89,13 @@ public class gegevens extends AppCompatActivity {
                 veranderEmail();
             }
         });
+        bNaam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                veranderNaam();
+            }
+        });
+
         bWachtwoord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +108,8 @@ public class gegevens extends AppCompatActivity {
 
 
 
+
+
     }
 
     public void initControl() {
@@ -102,8 +117,12 @@ public class gegevens extends AppCompatActivity {
         bVerwijder= findViewById(R.id.bVerwijder);
         showemail = findViewById(R.id.showemail);
         bEmail = findViewById(R.id.bEmail);
+        showNaam= findViewById(R.id.shownaam);
+        bNaam = findViewById(R.id.bNaam);
+        editNaam = findViewById(R.id.editNaam);
         editEmail = findViewById(R.id.editEmail);
         bWachtwoord = findViewById(R.id.bWachtwoord);
+
     }
 
     private void Logout(){
@@ -181,7 +200,7 @@ public class gegevens extends AppCompatActivity {
             progressDialog = new ProgressDialog(this);
 
 
-        if (geklikt) {
+
             bEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -240,8 +259,79 @@ public class gegevens extends AppCompatActivity {
 
                 }
             });
-            geklikt = false;
-        }
+    }
+
+    public void veranderNaam(){
+        showNaam.setVisibility(View.INVISIBLE);
+        editNaam.setVisibility(View.VISIBLE);
+        bNaam.setText("verstuur");
+        progressDialog = new ProgressDialog(this);
+
+
+
+        bNaam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+
+                AuthCredential credential = EmailAuthProvider
+                        .getCredential(firebaseUser.getDisplayName().toString(), "123456");
+                firebaseUser.reauthenticate(credential);
+
+
+                String nieuwNaam = editNaam.getText().toString().trim();
+
+
+
+                if (editNaam.getText().toString().isEmpty()) {
+                    Toast.makeText(gegevens.this, "Voer astublieft uw naam in", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    progressDialog.setMessage("Laden");
+                    //laat het laden zien
+                    progressDialog.show();
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(nieuwNaam)
+
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                        String gebruiker = firebaseUser.getDisplayName().toString();
+                                        showNaam.setText(gebruiker);
+
+                                        editNaam.setVisibility(View.INVISIBLE);
+                                        showNaam.setVisibility(View.VISIBLE);
+                                        bNaam.setText("pas aan");
+                                        editNaam.setText("");
+                                        //veranderd = true;
+
+                                        Toast.makeText(gegevens.this, "Naam wijzigen is gelukt", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(gegevens.this, "Naam wijzigen is niet gelukt, probeer opnieuw", Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                }
+                            });
+
+
+
+
+                }
+
+            }
+        });
     }
 
 

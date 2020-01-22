@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registatie extends AppCompatActivity {
 
@@ -49,6 +51,7 @@ public class Registatie extends AppCompatActivity {
                     //upload data naar de database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+                    final String user_name = userName.getText().toString().trim();
 
 
                     // firebase functie die de email en het wachtwoord gebruikt om een account aan te maken.
@@ -58,8 +61,33 @@ public class Registatie extends AppCompatActivity {
 
                             //als registratie succesvol is geef melding registreren succevol en stuur door naar inlogscherm
                             if (task.isSuccessful()) {
-                                Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Registatie.this, inlogscherm.class));
+
+
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(user_name)
+
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    //  Log.d(TAG, "User profile updated.");
+
+                                                    Toast.makeText(Registatie.this, "Registreren succesvol.", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(new Intent(Registatie.this, inlogscherm.class));
+                                                }
+                                            }
+                                        });
+
+
+
+
+
                             } else {
                                 // als niet succesvol dan is het registreren mislukt.
                                 Toast.makeText(Registatie.this, "Registreren mislukt.", Toast.LENGTH_SHORT).show();
@@ -67,6 +95,8 @@ public class Registatie extends AppCompatActivity {
 
                         }
                     });
+
+
 
                 }
             }
@@ -103,44 +133,43 @@ public class Registatie extends AppCompatActivity {
         userEmail = (EditText)findViewById(R.id.etUserEmail);
         regButton = (Button) findViewById(R.id.btnRegister);
         userLogin = (TextView)findViewById(R.id.tvUserLogin);
-
     }
 
-	// valideer functie voor het registeren
-	private Boolean validate() {
-		boolean hasError = true;
-		String message = "";
+    // valideer functie voor het registeren
+    private Boolean validate() {
+        boolean hasError = true;
+        String message = "";
 
-		String name = userName.getText().toString().trim();
-		String password = userPassword.getText().toString().trim();
-		String password2 = userPassword2.getText().toString().trim();
-		String email = userEmail.getText().toString().trim();
+        String name = userName.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
+        String password2 = userPassword2.getText().toString().trim();
+        String email = userEmail.getText().toString().trim();
 
-		// als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
-		if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
-			message = "Voer alstublieft alles in";
+        // als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
+        if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
+            message = "Voer alstublieft alles in";
 
-		} else if (!isEmailValid(email)) {
-			message = "Geen geldig e-mailadres";
+        } else if (!isEmailValid(email)) {
+            message = "Geen geldig e-mailadres";
 
-		} else if (!password.equals(password2)) {
-			message = "Beide wachtwoorden moeten gelijk zijn..";
+        } else if (!password.equals(password2)) {
+            message = "Beide wachtwoorden moeten gelijk zijn..";
 
-		} else {
-			hasError = false;
-		}
+        } else {
+            hasError = false;
+        }
 
-		if (hasError) {
-			Toast.makeText(Registatie.this, message, Toast.LENGTH_SHORT).show();
-			return false;
-		} else {
-			return true;
-		}
-	}
+        if (hasError) {
+            Toast.makeText(Registatie.this, message, Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	boolean isEmailValid(CharSequence email) {
-		return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-	}
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     // btnRegister knop toewijzen aan variabele
     public void findByID() {
