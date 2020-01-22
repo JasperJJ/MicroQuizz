@@ -68,7 +68,7 @@ public class Museums {
 
 	// Getters and Setter for the Quiz
 
-    public HashMap<String, String> getQuiz() {
+    public HashMap<String, String> getQuiz() throws IndexOutOfBoundsException {
         return (HashMap<String, String>) ((ArrayList) ((ArrayList) this.quizlist.get(currentMuseumKey)).get(currentObjectKey)).get(currentquizKey);
     }
     public HashMap<String, String> getQuiz(int mKey, int oKey, int qKey) {

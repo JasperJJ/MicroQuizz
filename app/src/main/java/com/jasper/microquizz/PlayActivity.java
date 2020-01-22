@@ -3,6 +3,7 @@ package com.jasper.microquizz;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
@@ -83,14 +84,29 @@ public class PlayActivity extends AppCompatActivity {
 				@Override
 				public void done(Museums museums) {
 					musea = museums;
-					quiz = musea.getQuiz();
-					setQuestions(quiz);
+					try {
+						quiz = musea.getQuiz();
+					} catch (Exception e) {
+						finish();
+					}
+					if (quiz != null) {
+						setQuestions(quiz);
+					} else {
+						finish();
+					}
 				}
 			});
 		} else {
 			musea = app.getMuseum();
-			quiz = musea.getQuiz();
-			setQuestions(quiz);
+			try {
+				quiz = musea.getQuiz();
+			} catch (Exception ignored) { }
+
+			if (quiz != null) {
+				setQuestions(quiz);
+			} else {
+				finish();
+			}
 		}
 	}
 

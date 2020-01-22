@@ -8,6 +8,7 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -29,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 // importeer firebase extensie
 import com.google.firebase.auth.FirebaseAuth;
 import com.jasper.microquizz.bluetooth.Bluetooth;
+import com.jasper.microquizz.bluetooth.uart;
 import com.jasper.microquizz.interfaces.ParsedNdefRecord;
 import com.jasper.microquizz.interfaces.onBLEConnection;
 import com.jasper.microquizz.nfc.parser.NdefMessageParser;
@@ -37,7 +39,6 @@ import com.jasper.microquizz.interfaces.LoadDataCallback;
 import com.jasper.microquizz.models.Museums;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-
     private FirebaseAuth firebaseAuth;
     private Button logout;
     private DrawerLayout drawerLayout;
@@ -53,8 +54,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Bluetooth mBlue;
     private boolean bleConnected;
 
+	private uart mUART;
+
     private AlphaAnimation fadeIn;
     private AlphaAnimation fadeOut;
+    private String bltID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onConnected() {
                 bleConnected = true;
+                if (mUART.initialize()) {
+                    if (mUART.connect(bltID)) {
+                        mUART.enableTXNotification();
+                        mUART.writeRXCharacteristic("Hallo :".getBytes());
+                        mUART.writeRXCharacteristic(":".getBytes());
+                        mUART.disconnect();
+                        mUART.close();
+                    }
+                }
                 startPlayActivity();
             }
 
@@ -122,6 +135,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 setNFCScanner(reason);
             }
         });
+
+        mUART = new uart(this);
     }
 
     //logout functie om uit te roepen en te verwijzen naar het inlogscherm
@@ -303,14 +318,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             ParsedNdefRecord record = records.get(i);
             String str = record.str();
             builder.append(str);
-            if (i != (size - 1)) builder.append("\n");
+            if (i != ( size - 1 ))
+                builder.append("\n");
         }
 
         String[] parts = builder.toString().split(",");
         String museaKey = parts[0].split("=")[1];
         String objectKey = parts[1].split("=")[1];
         String quizKey = parts[2].split("=")[1];
-        String bltID = parts[3].split("=")[1];
+        bltID = parts[3].split("=")[1];
 
         App app = (App) getApplicationContext();
         Museums museum = app.getMuseum();
@@ -318,8 +334,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         museum.setCurrentObjectKey(Integer.parseInt(objectKey));
         museum.setCurrentquizKey(Integer.parseInt(quizKey));
 
-        if (mBlue.startConnection(bltID))
+        if (mBlue.startConnection(bltID)) {
             setLoading();
+        }
     }
 
     private void startPlayActivity() {
