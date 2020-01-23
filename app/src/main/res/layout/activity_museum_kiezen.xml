@@ -12,7 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <include layout="@layout/toolbar" />
+<!--        <include layout="@layout/toolbar" />-->
+
+    <ImageView
+      android:id="@+id/ivBack"
+      android:layout_width="28dp"
+      android:layout_height="23dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_back_arrow_black_24dp" />
 
     <ImageView
         android:layout_width="145dp"
@@ -29,26 +39,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bottom_left_blue_corner" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Museum kiezen"
-        android:textSize="44sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="30dp"
+          android:layout_marginTop="64dp"
+          android:text="Alle Museums"
+          android:textSize="36sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.098"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        tools:listitem="@layout/musea_list"/>
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/my_recycler_view"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:scrollbars="vertical"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
+          tools:listitem="@layout/musea_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

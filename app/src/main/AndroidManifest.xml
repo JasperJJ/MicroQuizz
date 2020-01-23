@@ -6,7 +6,23 @@
 
     <dist:module dist:instant="true" />
 
+    <uses-feature android:name="android.hardware.nfc" />
+
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="android.permission.BLUETOOTH"
+        android:label="BLUETOOTH" />
+    <permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +30,10 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".WachtwoordWijzig"></activity>
+        <activity android:name=".gegevens" />
+        <activity android:name=".Forgot"></activity>
+        <activity android:name=".FeedbackActivity" />
         <activity android:name=".HighscoreActivity"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".LocatiesActivity" />

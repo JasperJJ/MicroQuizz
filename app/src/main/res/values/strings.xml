@@ -12,7 +12,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="onderwerp">Onderwerp</string>
-    <string name="information">Informaite over de locatie of over het beeld schilderij. \n Algemeen verhaaltje</string>
+    <string name="information">Scan de NFC tag voor een quiz</string>
     <string name="play">Play</string>
     <string name="highscore">Highscore</string>
     <string name="plus">Plus</string>
@@ -22,8 +22,12 @@
     <string name="registreren">Registreren</string>
     <string name="wachtwoord_bevestigen">Wachtwoord bevestigen</string>
     <string name="wachtwoord">Wachtwoord</string>
+    <string name="wachtwoord2">Herhaal wachtwoord</string>
     <string name="gebruikersnaam">Gebruikersnaam</string>
     <string name="vraag1">Antwoord 1</string>
     <string name="vraag2">Antwoord 2</string>
     <string name="vraag3">Antwoord 3</string>
+    <string name="send">Verstuur</string>
+    <string name="your_feedback">Voer hier uw feedback in:</string>
+    <string name="loading">Laden…</string>
 </resources>

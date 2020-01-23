@@ -107,6 +107,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
 
+    <TextView
+        android:id="@+id/wachtwoord2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="316dp"
+        android:text="@string/wachtwoord2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
+
+    <EditText
+        android:id="@+id/et_wachtwoord2"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="352dp"
+        android:background="@drawable/rounded_corners_with_stroke"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_registreren" />
+
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="280dp"
@@ -116,10 +139,10 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_wachtwoord"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.608" />
 
     <TextView
         android:id="@+id/tvUserLogin"

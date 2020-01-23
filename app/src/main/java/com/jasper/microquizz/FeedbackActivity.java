@@ -1,18 +1,17 @@
 package com.jasper.microquizz;
 
+import android.graphics.drawable.GradientDrawable;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.app.ProgressDialog;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,9 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 
 public class FeedbackActivity extends AppCompatActivity {
     private EditText tekstvak;
-    private EditText emailadres;
     private Button btn_verstuur;
-    private TextView tv_terug;
+    private ImageView iv_back;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -51,9 +49,8 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 // de data wordt uit de vakjes gehaald en in een string gezet
                 String tekst = tekstvak.getText().toString().trim();
-                String email = emailadres.getText().toString().trim();
                 String gebruiker = firebaseUser.getEmail().toString();
-                if (tekst.isEmpty() || email.isEmpty()) {
+                if (tekst.isEmpty()) {
                     Toast.makeText(FeedbackActivity.this, "Voer alstublieft alles in", Toast.LENGTH_SHORT).show();
                 } else {
                     progressDialog.setMessage("laden");
@@ -65,11 +62,8 @@ public class FeedbackActivity extends AppCompatActivity {
                     String feedbackId = pushedPostRef.getKey();
 
                     // de data wordt in de database gezet
-                    mDatabase.child("feedback").child(feedbackId).child("email").setValue(email);
                     mDatabase.child("feedback").child(feedbackId).child("tekst").setValue(tekst);
                     mDatabase.child("feedback").child(feedbackId).child("gebruiker").setValue(gebruiker);
-
-
 
                     startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
                     progressDialog.dismiss();
@@ -79,32 +73,28 @@ public class FeedbackActivity extends AppCompatActivity {
         });
 
 
-        tv_terug.setOnClickListener(new View.OnClickListener() {
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+                finish();
             }
         });
      }
 
     public void initControl() {
-        btn_verstuur = (Button) findViewById(R.id.btn_verstuur);
-        tv_terug = (TextView)findViewById(R.id.tvTerug);
+        btn_verstuur = findViewById(R.id.btn_verstuur);
+        iv_back = findViewById(R.id.ivBack);
         tekstvak = findViewById(R.id.ET_tekstvak);
-        emailadres = findViewById(R.id.ET_email);
-        //btn_verstuur = setOnClickListener(this);
     }
 
     public void setBackGroundColors() {
-        //GradientDrawable btn_verstuur_bg = (GradientDrawable) btn_verstuur.getBackground();
-
-        //btn_verstuur_bg.setColor(getResources().getColor(R.color.colorBlue));
+        GradientDrawable btn_verstuur_bg = (GradientDrawable) btn_verstuur.getBackground();
+        btn_verstuur_bg.setColor(getResources().getColor(R.color.colorBlue));
     }
 
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
-

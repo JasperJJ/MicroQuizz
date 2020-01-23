@@ -26,6 +26,7 @@ public class inlogscherm extends AppCompatActivity {
     private EditText mWachtwoord;
     private Button login;
     private TextView userRegistration;
+    private TextView userForgot;
 
     //teller voor inlogpogingen
     private int loginTeller = 3;
@@ -48,6 +49,7 @@ public class inlogscherm extends AppCompatActivity {
         mWachtwoord = findViewById(R.id.et_wachtwoord);
         login = findViewById(R.id.btn_inloggen);
         userRegistration = findViewById(R.id.tvRegister);
+        userForgot = findViewById(R.id.tvForgot);
 
         // inlogpoging.setText("Aantal pogingen over: 3");
 
@@ -89,6 +91,12 @@ public class inlogscherm extends AppCompatActivity {
                 startActivity(new Intent(inlogscherm.this, Registatie.class));
             }
         });
+
+        userForgot.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(inlogscherm.this, Forgot.class));
+            }
+        });
     }
 
     // public void findByID() {
@@ -119,6 +127,7 @@ public class inlogscherm extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     // wanneer succesvol ingelogd geef dan inloggen gelukt en verwijs naar de homeactivity
                     Toast.makeText(inlogscherm.this, "Inloggen gelukt", Toast.LENGTH_LONG).show();
+                    finish();
                     startActivity(new Intent(inlogscherm.this, HomeActivity.class));
                 } else {
 
