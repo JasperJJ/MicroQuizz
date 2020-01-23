@@ -30,6 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".WachtwoordWijzig"></activity>
+        <activity android:name=".gegevens" />
         <activity android:name=".Forgot"></activity>
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".HomeActivity" />
