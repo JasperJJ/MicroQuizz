@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -38,6 +39,7 @@ public class gegevens extends AppCompatActivity {
 	private EditText etName;
 	private Button btnChangePassword;
 	private Button btnSave;
+	private ImageView iv_back;
 	private ProgressDialog progressDialog;
 	private DrawerLayout drawerLayout;
 	private boolean isNameChanged;
@@ -79,6 +81,13 @@ public class gegevens extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(gegevens.this, WachtwoordWijzig.class));
+			}
+		});
+
+		iv_back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 	}
@@ -163,6 +172,7 @@ public class gegevens extends AppCompatActivity {
 		etName = findViewById(R.id.et_name);
 		btnChangePassword = findViewById(R.id.btn_change_password);
 		btnSave = findViewById(R.id.btn_save);
+		iv_back = findViewById(R.id.ivBack);
 	}
 
 	private void VerwijderAccount() {
@@ -312,12 +322,7 @@ public class gegevens extends AppCompatActivity {
 							Intent intent = new Intent(gegevens.this, Beginscherm.class);
 							startActivity(intent);
 							return true;
-						} else if (itemId == R.id.action_musea) {
-							Intent intent = new Intent(gegevens.this, LocatiesActivity.class);
-							startActivity(intent);
-							return true;
 						}
-
 						return false;
 					}
 				});
@@ -347,5 +352,11 @@ public class gegevens extends AppCompatActivity {
 				progressDialog.dismiss();
 			}
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
 	}
 }

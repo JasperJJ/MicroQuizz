@@ -12,7 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <include layout="@layout/toolbar" />
+<!--        <include layout="@layout/toolbar" />-->
+
+    <ImageView
+      android:id="@+id/ivBack"
+      android:layout_width="28dp"
+      android:layout_height="23dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_back_arrow_black_24dp" />
 
     <ImageView
         android:layout_width="145dp"

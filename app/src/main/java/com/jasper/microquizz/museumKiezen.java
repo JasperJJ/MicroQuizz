@@ -1,5 +1,7 @@
 package com.jasper.microquizz;
 
+import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class museumKiezen extends AppCompatActivity implements museumAdapter.Ite
     private RecyclerView recyclerView;
     private museumAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,14 @@ public class museumKiezen extends AppCompatActivity implements museumAdapter.Ite
         mAdapter = new museumAdapter(this, musea);
         mAdapter.setClickListener(this);
         recyclerView.setAdapter(mAdapter);
+
+        iv_back = findViewById(R.id.ivBack);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void configureToolbar() {
@@ -102,4 +113,9 @@ public class museumKiezen extends AppCompatActivity implements museumAdapter.Ite
 //        this.startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

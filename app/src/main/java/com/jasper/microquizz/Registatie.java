@@ -166,41 +166,6 @@ public class Registatie extends AppCompatActivity {
 		}
 	}
 
-	boolean isEmailValid(CharSequence email) {
-		return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-	}
-    // valideer functie voor het registeren
-    private Boolean validate() {
-        boolean hasError = true;
-        String message = "";
-
-        String name = userName.getText().toString().trim();
-        String password = userPassword.getText().toString().trim();
-        String password2 = userPassword2.getText().toString().trim();
-        String email = userEmail.getText().toString().trim();
-
-        // als de naam niet is ingevuld, of het wachtwoord of de email is leeg geef de volgende melding:
-        if (name.isEmpty() || password.isEmpty() || password2.isEmpty() || email.isEmpty()) {
-            message = "Voer alstublieft alles in";
-
-        } else if (!isEmailValid(email)) {
-            message = "Geen geldig e-mailadres";
-
-        } else if (!password.equals(password2)) {
-            message = "Beide wachtwoorden moeten gelijk zijn..";
-
-        } else {
-            hasError = false;
-        }
-
-        if (hasError) {
-            Toast.makeText(Registatie.this, message, Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }

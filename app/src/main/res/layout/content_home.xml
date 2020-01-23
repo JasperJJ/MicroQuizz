@@ -89,12 +89,4 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
-  <TextView
-      android:id="@+id/test"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textSize="30sp"
-      tools:layout_editor_absoluteX="107dp"
-      tools:layout_editor_absoluteY="114dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

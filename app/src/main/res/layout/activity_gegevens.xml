@@ -12,19 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <include
-          android:id="@+id/include2"
-          layout="@layout/toolbar" />
+<!--        <include-->
+<!--          android:id="@+id/include2"-->
+<!--          layout="@layout/toolbar" />-->
+
+        <ImageView
+          android:id="@+id/ivBack"
+          android:layout_width="28dp"
+          android:layout_height="23dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_back_arrow_black_24dp" />
 
         <TextView
           android:id="@+id/textView2"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
+          android:layout_marginTop="32dp"
           android:text="Account gegevens"
           android:textSize="24sp"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/include2" />
+          app:layout_constraintTop_toBottomOf="@+id/ivBack" />
         <TextView
           android:id="@+id/tv_email"
           android:layout_width="wrap_content"

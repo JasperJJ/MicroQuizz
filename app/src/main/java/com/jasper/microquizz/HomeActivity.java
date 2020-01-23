@@ -195,25 +195,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
                 if (itemId == R.id.action_home) {
-                    // verwijs naar home als er op action_home wordt gedrukt.
-                    Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 }else if (itemId == R.id.action_feedback) {
                     Intent intent = new Intent(HomeActivity.this, FeedbackActivity.class);
                     // verwijs naar een andere activiteit locaties.
                     startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 }else if (itemId == R.id.action_gegevens) {
                     Intent intent = new Intent(HomeActivity.this, gegevens.class);
                     // verwijs naar een andere activiteit locaties.
                     startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 } else if (itemId == R.id.uitloggen) {
                     // als er op logout wordt gedrukt dan roepen we de uitlog functie op.
                     Logout();
-                   // Intent intent = new Intent(HomeActivity.this, Beginscherm.class);
-                   // startActivity(intent);
+                    drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 }
                 return false;

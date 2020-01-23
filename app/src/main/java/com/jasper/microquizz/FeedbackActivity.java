@@ -76,7 +76,7 @@ public class FeedbackActivity extends AppCompatActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+                finish();
             }
         });
      }
@@ -90,5 +90,11 @@ public class FeedbackActivity extends AppCompatActivity {
     public void setBackGroundColors() {
         GradientDrawable btn_verstuur_bg = (GradientDrawable) btn_verstuur.getBackground();
         btn_verstuur_bg.setColor(getResources().getColor(R.color.colorBlue));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
