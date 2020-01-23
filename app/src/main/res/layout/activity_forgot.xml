@@ -1,78 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Forgot">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".Forgot">
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="145dp"
-        android:layout_height="159dp"
-        android:layout_marginEnd="-10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_right_purple_corner" />
+  <ImageView
+    android:id="@+id/imageView6"
+    android:layout_width="145dp"
+    android:layout_height="159dp"
+    android:layout_marginEnd="-10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/top_right_purple_corner" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="292dp"
-        android:layout_height="255dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bottom_left_blue_corner" />
+  <ImageView
+    android:id="@+id/imageView4"
+    android:layout_width="292dp"
+    android:layout_height="255dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:srcCompat="@drawable/bottom_left_blue_corner" />
 
+  <TextView
+    android:id="@+id/textView5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="60dp"
+    android:layout_marginEnd="32dp"
+    android:text="Wachtwoord vergeten"
+    android:textSize="24sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="60dp"
-        android:text="Wachtwoord vergeten"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <EditText
+    android:id="@+id/etForgotEmail"
+    android:layout_width="273dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginEnd="32dp"
+    android:background="@drawable/rounded_corners_with_stroke"
+    android:ems="10"
+    android:hint="@string/e_mail"
+    android:inputType="textEmailAddress"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etForgotEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <Button
+    android:id="@+id/btForgot"
+    android:layout_width="280dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="41dp"
+    android:background="@drawable/rounded_corners"
+    android:text="Reset"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/etForgotEmail" />
 
-    <Button
-        android:id="@+id/btForgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="41dp"
-        android:text="Reset"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etForgotEmail" />
+  <TextView
+    android:id="@+id/textView3"
+    android:layout_width="274dp"
+    android:layout_height="59dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    android:layout_marginEnd="32dp"
+    android:text="Wanneer u hieronder uw e-mail invult krijgt u een link waarmee u uw wachtwoord kunt resetten"
+    app:layout_constraintBottom_toTopOf="@+id/textView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.496"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView5"
+    app:layout_constraintVertical_bias="0.861" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="44dp"
-        android:text="Wanneer u hier onder uw e-mail invult \n krijgt u een link waarmee u uw wachtwoord \n kunt resetten"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="316dp"
-        android:text="Vul hier uw e-mail in"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <TextView
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:text="Vul hier uw e-mail in"
+    app:layout_constraintBottom_toTopOf="@+id/etForgotEmail"
+    app:layout_constraintStart_toStartOf="@+id/etForgotEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

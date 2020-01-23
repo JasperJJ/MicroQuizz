@@ -1,5 +1,7 @@
 package com.jasper.microquizz;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +40,7 @@ public class Forgot extends AppCompatActivity {
 
         btForgot = (Button) findViewById(R.id.btForgot);
 
-
+        setBackGroundColors();
 
         auth = FirebaseAuth.getInstance();
 
@@ -75,4 +77,9 @@ public class Forgot extends AppCompatActivity {
         });
     }
 
+    public void setBackGroundColors() {
+        btForgot.setTextColor(Color.WHITE);
+        GradientDrawable btForgot_bg = (GradientDrawable) btForgot.getBackground();
+        btForgot_bg.setColor(getResources().getColor(R.color.colorBlue));
+    }
 }
