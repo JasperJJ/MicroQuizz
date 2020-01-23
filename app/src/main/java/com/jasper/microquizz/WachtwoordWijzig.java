@@ -1,10 +1,11 @@
 package com.jasper.microquizz;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class WachtwoordWijzig extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         initControl();
+        setBackGroundColors();
 
         bVerander.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +88,12 @@ public class WachtwoordWijzig extends AppCompatActivity {
             }
         });
 
+    }
+    public void setBackGroundColors() {
+        bVerander.setTextColor(Color.WHITE);
+
+        GradientDrawable bVerander_bg = (GradientDrawable) bVerander.getBackground();
+        bVerander_bg.setColor(getResources().getColor(R.color.colorBlue));
     }
 
     public void initControl(){
