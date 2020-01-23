@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".Forgot">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="145dp"
+        android:layout_height="159dp"
+        android:layout_marginEnd="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_right_purple_corner" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="292dp"
+        android:layout_height="255dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bottom_left_blue_corner" />
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="60dp"
+        android:text="Wachtwoord vergeten"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etForgotEmail"
         android:layout_width="wrap_content"
@@ -21,7 +49,30 @@
         android:id="@+id/btForgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="479dp" />
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="41dp"
+        android:text="Reset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etForgotEmail" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="44dp"
+        android:text="Wanneer u hier onder uw e-mail invult \n krijgt u een link waarmee u uw wachtwoord \n kunt resetten"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="316dp"
+        android:text="Vul hier uw e-mail in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
