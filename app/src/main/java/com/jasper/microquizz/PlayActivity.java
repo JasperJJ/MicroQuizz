@@ -3,7 +3,7 @@ package com.jasper.microquizz;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
@@ -15,9 +15,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jasper.microquizz.interfaces.LoadDataCallback;
 import com.jasper.microquizz.models.Museums;
 import com.jasper.microquizz.utils.QUIZ;
@@ -37,6 +46,7 @@ public class PlayActivity extends AppCompatActivity {
 	private RadioButton rb_antwoord2;
 	private RadioButton rb_antwoord3;
 	private RadioGroup rg_antwoorden;
+	private int mHighscore;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +72,66 @@ public class PlayActivity extends AppCompatActivity {
 		rg_antwoorden.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup radioGroup, int index) {
-				View radioButton = rg_antwoorden.findViewById(index);
+				final View radioButton = rg_antwoorden.findViewById(index);
 
 				String answer = ( (AppCompatRadioButton) radioButton ).getText().toString();
-				boolean isCorrect = checkAnswer(answer);
+				final boolean isCorrect = checkAnswer(answer);
 
 				if (isCorrect) {
 					( (AppCompatRadioButton) radioButton ).setChecked(false);
+					for (int i = 0; i < rg_antwoorden.getChildCount(); i++) {
+						( rg_antwoorden.getChildAt(i) ).setEnabled(false);
+					}
 					newQuestion();
+
 				} else {
 					( (AppCompatRadioButton) radioButton ).setChecked(false);
+					for (int i = 0; i < rg_antwoorden.getChildCount(); i++) {
+						( rg_antwoorden.getChildAt(i) ).setEnabled(false);
+					}
+					newQuestion();
 				}
+			}
+		});
+	}
+
+	private void addToHigscore() {
+		mHighscore += 10;
+	}
+
+	private int getHigscore() {
+		return mHighscore;
+	}
+
+	private void uploadHighscore() {
+		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+		final String displayName = user.getDisplayName();
+
+		final int newHighScore = getHigscore();
+		final String highScoreKey = "" + musea.getCurrentMuseumKey() + musea.getCurrentObjectKey();
+
+		final String path = "/highscore/" + displayName + "/" + highScoreKey;
+
+		final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(path);
+
+		mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot dataSnapshot) {
+				Object value = dataSnapshot.getValue(Object.class);
+
+				int highScore = 0;
+				if (value != null) {
+					highScore = Integer.parseInt(value.toString());
+				}
+
+				if (displayName != null && !displayName.isEmpty() && newHighScore > highScore) {
+					mDatabase.setValue(newHighScore);
+				}
+			}
+
+			@Override
+			public void onCancelled(DatabaseError databaseError) {
+
 			}
 		});
 	}
@@ -100,7 +159,8 @@ public class PlayActivity extends AppCompatActivity {
 			musea = app.getMuseum();
 			try {
 				quiz = musea.getQuiz();
-			} catch (Exception ignored) { }
+			} catch (Exception ignored) {
+			}
 
 			if (quiz != null) {
 				setQuestions(quiz);
@@ -121,6 +181,10 @@ public class PlayActivity extends AppCompatActivity {
 		rb_antwoord2.setText(keuze2);
 		rb_antwoord3.setText(keuze3);
 
+		for (int i = 0; i < rg_antwoorden.getChildCount(); i++) {
+			( rg_antwoorden.getChildAt(i) ).setEnabled(true);
+		}
+
 //		For testing
 //		System.out.println("Musea name: " + musea.getMuseaName());
 //		System.out.println("Object name: " + musea.getObjectName());
@@ -134,19 +198,38 @@ public class PlayActivity extends AppCompatActivity {
 	private boolean checkAnswer(String answer) {
 		String antwoord = quiz.get(QUIZ.answer.name());
 		boolean isCorrect = antwoord.equals(answer);
-		if (!isCorrect) {
-			Toast.makeText(this, "Fout antwoord", Toast.LENGTH_SHORT).show();
+		if (isCorrect) {
+			addToHigscore();
+			Snackbar snackbar = Snackbar.make(tv_vraag, "Antwoord Goed", Snackbar.LENGTH_SHORT);
+			snackbar.getView().setBackgroundColor(
+					ContextCompat.getColor(PlayActivity.this, R.color.colorGreen));
+			snackbar.show();
+		} else {
+			Snackbar snackbar = Snackbar.make(tv_vraag, "Antwoord Fout", Snackbar.LENGTH_SHORT);
+			snackbar.getView().setBackgroundColor(
+					ContextCompat.getColor(PlayActivity.this, R.color.colorRed));
+			snackbar.show();
 		}
 		return isCorrect;
 	}
 
 	private void newQuestion() {
 		quiz = musea.nextQuiz();
+		Handler handler = new Handler();
 		if (quiz.size() != 0) {
-			setQuestions(quiz);
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					setQuestions(quiz);
+				}
+			}, 1300);
 		} else {
-			Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-			finish();
+			uploadHighscore();
+			Toast.makeText(PlayActivity.this, "Quiz Afgerond", Toast.LENGTH_SHORT).show();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					finish();
+				}
+			}, 1300);
 		}
 	}
 
@@ -192,6 +275,7 @@ public class PlayActivity extends AppCompatActivity {
 		}
 		return true;
 	}
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();

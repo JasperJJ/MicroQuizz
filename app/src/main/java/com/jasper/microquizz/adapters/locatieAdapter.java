@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jasper.microquizz.R;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class locatieAdapter extends RecyclerView.Adapter<locatieAdapter.MyViewHolder> {
@@ -37,7 +36,7 @@ public class locatieAdapter extends RecyclerView.Adapter<locatieAdapter.MyViewHo
 
         MyViewHolder(View v) {
             super(v);
-            titleView = v.findViewById(R.id.tv_info);
+            titleView = v.findViewById(R.id.tv_score);
             textView = v.findViewById(R.id.tv_name);
             imageView = v.findViewById(R.id.iv_subject);
             v.setOnClickListener(this);

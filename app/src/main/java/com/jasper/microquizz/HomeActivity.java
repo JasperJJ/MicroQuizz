@@ -239,6 +239,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         rl_loading = findViewById(R.id.rl_loading);
 
         btn_location.setOnClickListener(this);
+        btn_highscore.setOnClickListener(this);
     }
 
 

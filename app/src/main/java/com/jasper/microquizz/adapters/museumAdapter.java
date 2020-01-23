@@ -1,9 +1,6 @@
 package com.jasper.microquizz.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.TextView;
 
 import com.jasper.microquizz.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +35,7 @@ public class museumAdapter extends RecyclerView.Adapter<museumAdapter.MyViewHold
         MyViewHolder(View v) {
             super(v);
             nameView = v.findViewById(R.id.tv_name);
-            infoView = v.findViewById(R.id.tv_info);
+            infoView = v.findViewById(R.id.tv_score);
             imageView = v.findViewById(R.id.iv_subject);
             v.setOnClickListener(this);
         }
