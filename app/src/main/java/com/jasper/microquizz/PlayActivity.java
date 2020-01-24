@@ -197,7 +197,10 @@ public class PlayActivity extends AppCompatActivity {
 
 	private boolean checkAnswer(String answer) {
 		String antwoord = quiz.get(QUIZ.answer.name());
-		boolean isCorrect = antwoord.equals(answer);
+		boolean isCorrect = false;
+		if (antwoord != null) {
+			isCorrect = antwoord.equals(answer);
+		}
 		if (isCorrect) {
 			addToHigscore();
 			Snackbar snackbar = Snackbar.make(tv_vraag, "Antwoord Goed", Snackbar.LENGTH_SHORT);

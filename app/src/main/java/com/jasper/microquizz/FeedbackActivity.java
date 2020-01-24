@@ -65,9 +65,10 @@ public class FeedbackActivity extends AppCompatActivity {
                     mDatabase.child("feedback").child(feedbackId).child("tekst").setValue(tekst);
                     mDatabase.child("feedback").child(feedbackId).child("gebruiker").setValue(gebruiker);
 
-                    startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
+//                    startActivity(new Intent(FeedbackActivity.this, HomeActivity.class));
                     progressDialog.dismiss();
                     Toast.makeText(FeedbackActivity.this, "Bedankt voor de feedback", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });

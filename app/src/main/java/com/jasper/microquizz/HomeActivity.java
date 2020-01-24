@@ -102,11 +102,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        if (nfcAdapter == null) {
-            Toast.makeText(this, "No NFC", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+//        if (nfcAdapter == null) {
+//            Toast.makeText(this, "No NFC", Toast.LENGTH_SHORT).show();
+//            finish();
+//            return;
+//        }
 
         pendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, this.getClass())
@@ -119,7 +119,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 bleConnected = true;
                 if (mUART.initialize()) {
                     if (mUART.connect(bltID)) {
-                        mUART.enableTXNotification();
+//                        mUART.enableTXNotification();
+//                        mUART.getSupportedGattServices();
                         mUART.writeRXCharacteristic("Hallo :".getBytes());
                         mUART.writeRXCharacteristic(":".getBytes());
                         mUART.disconnect();
