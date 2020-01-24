@@ -152,8 +152,10 @@ public class Registatie extends AppCompatActivity {
 			message = "Geen geldig e-mailadres";
 
 		} else if (!password.equals(password2)) {
-			message = "Beide wachtwoorden moeten gelijk zijn..";
+			message = "Beide wachtwoorden moeten gelijk zijn...";
 
+		} else if (password.length() > 8) {
+			message = "Wachtwoord moet langer zijn dat 8 karakters";
 		} else {
 			hasError = false;
 		}
