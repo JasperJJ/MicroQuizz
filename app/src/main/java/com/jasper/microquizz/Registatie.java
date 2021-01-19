@@ -49,7 +49,7 @@ public class Registatie extends AppCompatActivity {
 
                     // als true
                     //upload data naar de database
-                    String user_email = userEmail.getText().toString().trim();
+                    final String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
                     final String user_name = userName.getText().toString().trim();
 
@@ -83,10 +83,6 @@ public class Registatie extends AppCompatActivity {
                                                 }
                                             }
                                         });
-
-
-
-
 
                             } else {
                                 // als niet succesvol dan is het registreren mislukt.
